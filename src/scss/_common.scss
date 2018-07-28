@@ -1,0 +1,45 @@
+*:before,
+*:after {
+ box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
+}
+
+*, html, body {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font;
+    background-color: $gray;
+}
+
+html, body {
+    height: 100%;
+    min-height: 100%;
+}
+
+a {
+    color: $blue;
+    text-decoration: none;
+}
+
+#root {
+    height: 100%;
+    .app {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        > div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .page {
+            flex: 1;
+        }
+    }
+}

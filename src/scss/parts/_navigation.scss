@@ -1,0 +1,38 @@
+.navigation {
+    max-height: 54px;
+    padding: 0 10px;
+    background-color: $white;
+    .controls {
+        display: flex;
+        align-items: center;
+        li:nth-child(1) {
+            a {
+                display: flex;
+                align-items: center;
+                color: $blue;
+                font-weight: bold;
+                
+                #logo {
+                    width: 30px;
+                    height: 30px;
+                    g {
+                        fill: $blue;
+                    }
+                }
+                h2 {
+                    padding-left: 10px;
+                }
+            }
+        }
+        > li {
+            flex: 0 0 auto;
+            padding: 0 10px;
+        }
+        li:nth-child(5) {
+            margin-right: auto;
+        }
+    }
+    .active {
+        color: $dark;
+    }
+}
