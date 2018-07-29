@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import * as routes from '../routes/routes'
+import * as routes from '../../routes/routes'
 
 export const NotFoundPage = () => 
   <div className={'notfound'}>

@@ -1,0 +1,23 @@
+.flowpage {
+    height: 100%;
+    display: flex;
+    flex: 1;
+    flex-flow: column;
+    .flowchart {
+        flex-grow: 1;
+        display: flex;
+        flex: 1;
+        flex-flow: column;
+    }
+    #chart {
+        flex-grow: 1;
+        display: flex;
+        flex: 1;
+        flex-flow: column;
+        svg {
+            flex-grow: 1;
+            position: absolute;
+            overflow: scroll;
+        }
+    }
+}

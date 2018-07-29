@@ -1,0 +1,10 @@
+.jsonpage {
+    height: 100%;
+    display: flex;
+    flex: 1;
+    flex-flow: column;
+    .raw {
+        padding: 20px;
+        flex-grow: 1;
+    }
+}

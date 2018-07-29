@@ -2,7 +2,12 @@
 @import 'reset';
 @import 'variables';
 @import 'common';
+
 @import 'parts/navigation';
 @import 'parts/tools';
-@import 'parts/page';
 @import 'parts/footer';
+
+@import 'pages/page';
+@import 'pages/homepage';
+@import 'pages/flowpage';
+@import 'pages/jsonpage';
