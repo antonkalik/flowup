@@ -3,19 +3,31 @@ import { Tools } from '../'
 import Raphael from 'raphael';
 
 export class FlowPage extends Component {
+    constructor(props) {
+        super(props)
+        this.paper = null
+        this.state = {
+            boxes: []
+        }
+    }
 
-    componentDidMount() {
+    addBox() {
+        const size = [90, 50, 4]
+        const boxParams = [20, 20, ...size]
+        
+        const box = this.paper.rect(...boxParams)
+        this.state.boxes.push(box)
+        this.doDragBoxes()
+    }
+    
 
-        const paper = Raphael('chart', '100%', '100%')
-        const boxSize = [90, 50, 4]
 
-        var rectangles = paper.set(
-            paper.rect(190, 100, ...boxSize),
-            paper.rect(290, 20, ...boxSize),
-            paper.rect(310, 190, ...boxSize),
-            paper.rect(450, 150, ...boxSize),
-            paper.rect(550, 150, ...boxSize)
-        ).attr({
+    doDragBoxes() {
+        let { boxes } = this.state
+
+        console.log(boxes)
+
+        var rectangles = this.paper.set([...boxes]).attr({
             fill: '#fff',
             stroke: 0,
             cursor: 'grab'
@@ -30,17 +42,19 @@ export class FlowPage extends Component {
             this.attr({
                 x: this.ox + dx,
                 y: this.oy + dy
-            })
+            });
         }
-
         rectangles.drag(move, startDrag);
+    }
+
+    componentDidMount() {
+        this.paper = Raphael('chart', '100%', '100%')
     }
     
     render() {
-        
         return (
             <div className={'flowpage'}>
-                <Tools />
+                <Tools addbox={() => this.addBox()} />
                 <div className={'flowchart'}>
                     <div id={'chart'}></div>
                 </div>
@@ -48,3 +62,11 @@ export class FlowPage extends Component {
         )
     }
 }
+
+
+
+    // doCreateLines() {
+    //     return Raphael.fn.doWireLine = function(shapeFrom, shapeTo) {
+    //         console.log(shapeFrom, shapeTo)
+    //     }
+    // }

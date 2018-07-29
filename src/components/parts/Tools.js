@@ -1,6 +1,18 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export const Tools = () =>
-    <div className={'tools'}>
-        <p>Tools</p>
-    </div>
+export class Tools extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
+
+    render() {
+        const { addbox } = this.props
+        return (
+            <div className={'tools'}>
+                <button onClick={addbox}>Add Box</button>
+            </div>
+        )
+    }
+}
+    
