@@ -14,20 +14,16 @@ export class FlowPage extends Component {
     addBox() {
         const size = [90, 50, 4]
         const boxParams = [20, 20, ...size]
-        
         const box = this.paper.rect(...boxParams)
+
         this.state.boxes.push(box)
         this.doDragBoxes()
     }
     
-
-
     doDragBoxes() {
         let { boxes } = this.state
 
-        console.log(boxes)
-
-        var rectangles = this.paper.set([...boxes]).attr({
+        const rectangles = this.paper.set([...boxes]).attr({
             fill: '#fff',
             stroke: 0,
             cursor: 'grab'
@@ -62,11 +58,3 @@ export class FlowPage extends Component {
         )
     }
 }
-
-
-
-    // doCreateLines() {
-    //     return Raphael.fn.doWireLine = function(shapeFrom, shapeTo) {
-    //         console.log(shapeFrom, shapeTo)
-    //     }
-    // }
