@@ -7,13 +7,36 @@ export class FlowPage extends Component {
         super(props)
         this.paper = null
         this.state = {
-            boxes: []
+            boxes: [],
+            circles: []
         }
     }
 
-    addBox() {
+    componentDidMount() {
+        Raphael.fn.connectionDots = function(rectangles) {
+            rectangles.forEach(el => {
+                el.click(() => {
+                    console.log('click by:', el)
+                    // here will create dots for wireBoxes function
+                })
+            });
+        }
+
+        this.paper = Raphael('chart', '100%', '100%')
+
+        // boxes for test
+        this.state.boxes.push(this.paper.rect(220, 120, 90, 50, 4))
+        this.addBox()
+    }
+
+    // create wire function wire between boxes
+    wireBoxes() {
+
+    }
+
+    addBox(...params) {
         const size = [90, 50, 4]
-        const boxParams = [20, 20, ...size]
+        const boxParams = [220, 20, ...size]
         const box = this.paper.rect(...boxParams)
 
         this.state.boxes.push(box)
@@ -21,8 +44,8 @@ export class FlowPage extends Component {
     }
     
     doDragBoxes() {
-        let { boxes } = this.state
-
+        let { boxes, circles } = this.state
+        
         const rectangles = this.paper.set([...boxes]).attr({
             fill: '#fff',
             stroke: 0,
@@ -40,12 +63,13 @@ export class FlowPage extends Component {
                 y: this.oy + dy
             });
         }
+        
         rectangles.drag(move, startDrag);
+
+        this.paper.connectionDots(rectangles);
     }
 
-    componentDidMount() {
-        this.paper = Raphael('chart', '100%', '100%')
-    }
+
     
     render() {
         return (
