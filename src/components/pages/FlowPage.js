@@ -15,7 +15,7 @@ export class FlowPage extends Component {
         this.paper = Raphael('chart', '100%', '100%')
     }
 
-    addBox() {
+    draggable(elements, circles) {
         const drag = function() {
             this.ox = this.type == 'rect' ? this.attr('x') : this.attr('cx');
             this.oy = this.type == 'rect' ? this.attr('y') : this.attr('cy');
@@ -46,26 +46,30 @@ export class FlowPage extends Component {
         }
 
         const up = function () {
-            this.animate({stroke: 0, 'stroke-width': 0}, 500);
-            circles.hide()
+            circles.show()
         }
 
+        elements.drag(move, drag, up);
+    }
+
+    addBox() {
+        
         this.state.boxes.push(
-            this.paper.rect(20, 20, 120, 50, 4).attr({
+            this.paper.rect(20 + this.state.boxes.length * 10, 20, 120, 50, 4).attr({
                 fill: '#fff',
-                stroke: 0,
-                cursor: 'grab'
+                stroke: '#f0f0f0',
+                cursor: 'grab',
+                'stroke-width': 1
             })
         )
+        const circles = this.paper.set([
+            this.paper.circle(10 + this.state.boxes.length * 10, 45, 3),
+            this.paper.circle(130 + this.state.boxes.length * 10, 45, 3)
+        ]).attr({fill: 'blue', stroke: 0})
 
         const elements = this.paper.set([...this.state.boxes])
 
-        const circles = this.paper.set([
-            this.paper.circle(20, 45, 3),
-            this.paper.circle(140, 45, 3)
-        ]).attr({fill: 'blue', stroke: 0})
-
-        elements.drag(move, drag, up);
+        this.draggable(elements, circles)
     }
 
     
