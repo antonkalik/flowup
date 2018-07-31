@@ -7,8 +7,7 @@ export class FlowPage extends Component {
         super(props)
         this.paper = null
         this.state = {
-            boxes: [],
-            circles: []
+            boxes: []
         }
     }
 
@@ -16,53 +15,60 @@ export class FlowPage extends Component {
         this.paper = Raphael('chart', '100%', '100%')
     }
 
-    addControles() {
-        this.state.circles.push(
-            this.paper.circle(20, 45, 3).attr({
-                fill: 'blue',
-                stroke: 0,
-                cursor: 'grab'
-            }),
-            this.paper.circle(110, 45, 3).attr({
-                fill: 'blue',
+    addBox() {
+        this.state.boxes.push(
+            this.paper.rect(20, 20, 90, 50, 4).attr({
+                fill: '#fff',
                 stroke: 0,
                 cursor: 'grab'
             })
         )
-    }
-
-    addBox() {
-        this.state.boxes.push(
-            this.paper.rect(20, 20, 90, 50, 4)
-        )
-        this.addControles()
         this.dragElements()
     }
 
     dragElements() {
-        let { boxes, circles } = this.state
-        
-        const controles = this.paper.set([...circles])
-        
-        const rectangles = this.paper.set([...boxes]).attr({
-            fill: '#fff',
-            stroke: 0,
-            cursor: 'grab'
-        });
+        let { boxes } = this.state
 
-        const startDrag = function() {
-            this.ox = this.type == "rect" ? this.attr("x") : this.attr("cx");
-            this.oy = this.type == "rect" ? this.attr("y") : this.attr("cy");
+        const dragger = function() {
+            this.ox = this.type == 'rect' ? this.attr('x') : this.attr('cx');
+            this.oy = this.type == 'rect' ? this.attr('y') : this.attr('cy');
         }
-        
+
         const move = function(dx, dy) {
-            let x = this.ox + dx;
-            let y = this.oy + dy;
-            let attr = this.type == "rect" ? { x, y } : { cx: x, cy: y }
-            this.attr(attr);
+            let mx = this.ox + dx;
+            let my = this.oy + dy;
+
+            const attributes = this.type == 'rect' ? {
+                x: mx,
+                y: my
+            } : {
+                cx: mx,
+                cy: my
+            };
+
+            this.attr(attributes);
+
+            const attrContr1 = {
+                cx: this.attr('x'),
+                cy: this.attr('y') + 25
+            }
+
+            const attrContr2 = {
+                cx: this.attr('x') + 90,
+                cy: this.attr('y') + 25
+            }
+            
+            circles[0].attr(attrContr1);
+            circles[1].attr(attrContr2);
         }
-        
-        rectangles.drag(move, startDrag);
+
+        const elements = this.paper.set([...boxes])
+        const circles = this.paper.set([
+            this.paper.circle(20, 45, 3).attr({fill: 'blue', stroke: 0}),
+            this.paper.circle(110, 45, 3).attr({fill: 'blue', stroke: 0})
+        ])
+
+        elements.drag(move, dragger);
     }
 
     
