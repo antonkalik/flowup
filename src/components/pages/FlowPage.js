@@ -7,7 +7,8 @@ export class FlowPage extends Component {
         super(props)
         this.paper = null
         this.state = {
-            panel: false,
+            chart: false,
+            panel: true,
             boxes: [],
             circles: []
         }
@@ -31,6 +32,11 @@ export class FlowPage extends Component {
     draggable(elements) {
 
         const { circles } = this.state
+
+        const clickByElement = element => {
+            const css = 'flex-grow: 1; width: 200px;'
+            document.getElementById('panel').style.cssText = css
+        }
 
         const drag = function() {
             elements.attr({
@@ -56,9 +62,10 @@ export class FlowPage extends Component {
             circles[0].attr(attr1).show()
             circles[1].attr(attr2).show()
 
+
             this.toFront()
             circles.toFront()
-            
+            clickByElement(this)
         }
 
         const move = function(dx, dy) {
@@ -90,14 +97,21 @@ export class FlowPage extends Component {
         const {circles} = this.state
         this.paper.raphael.click(() => {
             elements.attr({
-                stroke: '#e6e6e6',
+                stroke: '#dadada',
                 'stroke-width': 2
             })
             circles.hide()
+
+            const css = 'flex-grow: 0; width: 0px;'
+            document.getElementById('panel').style.cssText = css
         })
     }
 
     addBox() {
+        this.setState({
+            chart: true
+        });
+
         this.state.boxes.push(
             this.paper.rect(20 + this.state.boxes.length * 10, 20, 180, 90, 4).attr({
                 fill: '#fff',
@@ -114,17 +128,20 @@ export class FlowPage extends Component {
     }
     
     render() {
-        this.state.boxes.forEach(el => {
-            el.click(() => {
-                console.log(this)
-            })
-        });
+
         return (
             <div className={'flowpage'}>
                 <Tools addbox={() => this.addBox()} />
                 <div className={'flowchart'}>
-                    <div id={'chart'} />
-                    <div id={'panel'} />
+                        {
+                            !this.state.chart ? <p>No elements</p> : null
+                        }
+                    <div id={'chart'}>
+                        
+                    </div>
+                        {
+                            this.state.panel ? <div id={'panel'} /> : null
+                        }
                 </div>
             </div>
         )
