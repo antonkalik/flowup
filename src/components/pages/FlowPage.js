@@ -7,7 +7,7 @@ export class FlowPage extends Component {
         super(props)
         this.paper = null
         this.state = {
-            texts: [],
+            panel: false,
             boxes: [],
             circles: []
         }
@@ -15,7 +15,7 @@ export class FlowPage extends Component {
 
     componentDidMount() {
         this.paper = Raphael('chart', '100%', '100%')
-
+        
         this.setState({ circles: this.paper.set(
             this.paper.circle(10 + this.state.boxes.length * 10, 65, 3),
             this.paper.circle(180 + this.state.boxes.length * 10, 65, 3)
@@ -27,7 +27,7 @@ export class FlowPage extends Component {
         })
     }
 
-    draggable(elements, texts) {
+    draggable(elements) {
         const { circles } = this.state
         const drag = function() {
             elements.attr({
@@ -84,16 +84,23 @@ export class FlowPage extends Component {
     }
 
     selectItems(elements) {
-        const circles = this.state.circles
+        const {circles} = this.state
+        this.paper.raphael.click(() => {
+            elements.attr({
+                stroke: 'none'
+            })
+            circles.hide()
+        })
         elements.forEach(el => {
             el.click(e => {
                 if (el.id === e.target.raphaelid) {
                     el.toFront()
                     el.attr({stroke: 'blue', 'stroke-width': 2})
                     circles.toFront()
+                    this.setState({panel: true})
                 }
             })
-        });
+        })
     }
 
     addBox() {
@@ -106,22 +113,18 @@ export class FlowPage extends Component {
             })
         )
 
-        this.state.texts.push(
-            this.paper.text(50 + this.state.boxes.length * 10, 50, 'sometext')
-        )
-
         const elements = this.paper.set([...this.state.boxes])
-        const texts = this.paper.set([...this.state.texts])
 
-        this.draggable(elements, texts)
+        this.draggable(elements)
         this.selectItems(elements)
     }
     
-    render() {   
+    render() {
         return (
             <div className={'flowpage'}>
                 <Tools addbox={() => this.addBox()} />
                 <div className={'flowchart'}>
+                    <div id={'panel'}></div>
                     <div id={'chart'}></div>
                 </div>
             </div>
