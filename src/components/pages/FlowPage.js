@@ -16,8 +16,8 @@ export class FlowPage extends Component {
         this.paper = Raphael('chart', '100%', '100%')
 
         this.setState({ circles: this.paper.set(
-            this.paper.circle(10 + this.state.boxes.length * 10, 45, 3),
-            this.paper.circle(130 + this.state.boxes.length * 10, 45, 3)
+            this.paper.circle(10 + this.state.boxes.length * 10, 65, 3),
+            this.paper.circle(180 + this.state.boxes.length * 10, 65, 3)
         ).attr({
                 'stroke-width': 2,
                 stroke: 'blue',
@@ -29,6 +29,12 @@ export class FlowPage extends Component {
     draggable(elements) {
         const circles = this.state.circles
         const drag = function() {
+            elements.attr({
+                fill: '#fff',
+                stroke: '#f0f0f0',
+                cursor: 'grab',
+                'stroke-width': 1
+            })
             this.attr({stroke: 'blue', 'stroke-width': 2})
 
             this.ox = this.type == 'rect' ? this.attr('x') : this.attr('cx');
@@ -36,16 +42,19 @@ export class FlowPage extends Component {
             
             const attr1 = {
                 cx: this.attr('x'),
-                cy: this.attr('y') + 25
+                cy: this.attr('y') + 45
             }
 
             const attr2 = {
-                cx: this.attr('x') + 120,
-                cy: this.attr('y') + 25
+                cx: this.attr('x') + 180,
+                cy: this.attr('y') + 45
             }
             
             circles[0].attr(attr1).show()
             circles[1].attr(attr2).show()
+
+            this.toFront()
+            circles.toFront()
         }
 
         const move = function(dx, dy) {
@@ -58,12 +67,12 @@ export class FlowPage extends Component {
 
             const attr1 = {
                 cx: this.attr('x'),
-                cy: this.attr('y') + 25
+                cy: this.attr('y') + 45
             }
 
             const attr2 = {
-                cx: this.attr('x') + 120,
-                cy: this.attr('y') + 25
+                cx: this.attr('x') + 180,
+                cy: this.attr('y') + 45
             }
             
             circles[0].attr(attr1)
@@ -82,23 +91,17 @@ export class FlowPage extends Component {
         elements.forEach(el => {
             el.click(e => {
                 if (el.id === e.target.raphaelid) {
-                    elements.attr({
-                        fill: '#fff',
-                        stroke: '#f0f0f0',
-                        cursor: 'grab',
-                        'stroke-width': 1
-                    })
-                    
+                    el.toFront()
                     el.attr({stroke: 'blue', 'stroke-width': 2})
+                    circles.toFront()
                 }
             })
-            
         });
     }
 
     addBox() {
         this.state.boxes.push(
-            this.paper.rect(20 + this.state.boxes.length * 10, 20, 120, 50, 4).attr({
+            this.paper.rect(20 + this.state.boxes.length * 10, 20, 180, 90, 4).attr({
                 fill: '#fff',
                 stroke: '#f0f0f0',
                 cursor: 'move',
@@ -106,7 +109,7 @@ export class FlowPage extends Component {
             })
         )
         
-        const elements = this.paper.set([...this.state.boxes]).toBack()
+        const elements = this.paper.set([...this.state.boxes])
 
         this.draggable(elements)
         this.selectItems(elements)
