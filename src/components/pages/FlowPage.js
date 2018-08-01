@@ -25,19 +25,21 @@ export class FlowPage extends Component {
                 fill: '#fff'
             }).hide()
         })
+
     }
 
     draggable(elements) {
+
         const { circles } = this.state
+
         const drag = function() {
             elements.attr({
                 fill: '#fff',
-                stroke: '#f0f0f0',
+                stroke: '#e6e6e6',
                 cursor: 'grab',
-                'stroke-width': 1
+                'stroke-width': 2
             })
             this.attr({stroke: 'blue', 'stroke-width': 2})
-
             this.ox = this.type == 'rect' ? this.attr('x') : this.attr('cx');
             this.oy = this.type == 'rect' ? this.attr('y') : this.attr('cy');
             
@@ -56,6 +58,7 @@ export class FlowPage extends Component {
 
             this.toFront()
             circles.toFront()
+            
         }
 
         const move = function(dx, dy) {
@@ -87,19 +90,10 @@ export class FlowPage extends Component {
         const {circles} = this.state
         this.paper.raphael.click(() => {
             elements.attr({
-                stroke: 'none'
+                stroke: '#e6e6e6',
+                'stroke-width': 2
             })
             circles.hide()
-        })
-        elements.forEach(el => {
-            el.click(e => {
-                if (el.id === e.target.raphaelid) {
-                    el.toFront()
-                    el.attr({stroke: 'blue', 'stroke-width': 2})
-                    circles.toFront()
-                    this.setState({panel: true})
-                }
-            })
         })
     }
 
@@ -107,9 +101,9 @@ export class FlowPage extends Component {
         this.state.boxes.push(
             this.paper.rect(20 + this.state.boxes.length * 10, 20, 180, 90, 4).attr({
                 fill: '#fff',
-                stroke: '#f0f0f0',
+                stroke: 'blue',
                 cursor: 'move',
-                'stroke-width': 1
+                'stroke-width': 2
             })
         )
 
@@ -120,12 +114,17 @@ export class FlowPage extends Component {
     }
     
     render() {
+        this.state.boxes.forEach(el => {
+            el.click(() => {
+                console.log(this)
+            })
+        });
         return (
             <div className={'flowpage'}>
                 <Tools addbox={() => this.addBox()} />
                 <div className={'flowchart'}>
-                    <div id={'panel'}></div>
-                    <div id={'chart'}></div>
+                    <div id={'chart'} />
+                    <div id={'panel'} />
                 </div>
             </div>
         )

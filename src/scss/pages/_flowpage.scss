@@ -8,16 +8,15 @@
         display: flex;
         flex: 1;
         flex-flow: column;
+        flex-direction: row;
+    }
+    #panel {
+        background-color: $light;
+        flex-grow: 1;
+        min-width: 200px;
+        border-left: 2px solid $gray;
     }
     #chart {
-        flex-grow: 1;
-        display: flex;
-        flex: 1;
-        flex-flow: column;
-        svg {
-            flex-grow: 1;
-            position: absolute;
-            overflow: scroll;
-        }
+        flex-grow: 5;
     }
 }
