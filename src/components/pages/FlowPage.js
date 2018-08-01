@@ -7,8 +7,9 @@ export class FlowPage extends Component {
         super(props)
         this.paper = null
         this.state = {
-            circles: [],
-            boxes: []
+            texts: [],
+            boxes: [],
+            circles: []
         }
     }
 
@@ -26,8 +27,8 @@ export class FlowPage extends Component {
         })
     }
 
-    draggable(elements) {
-        const circles = this.state.circles
+    draggable(elements, texts) {
+        const { circles } = this.state
         const drag = function() {
             elements.attr({
                 fill: '#fff',
@@ -79,11 +80,7 @@ export class FlowPage extends Component {
             circles[1].attr(attr2)
         }
 
-        const up = function() {
-            
-        }
-
-        elements.drag(move, drag, up);
+        elements.drag(move, drag);
     }
 
     selectItems(elements) {
@@ -108,16 +105,19 @@ export class FlowPage extends Component {
                 'stroke-width': 1
             })
         )
-        
-        const elements = this.paper.set([...this.state.boxes])
 
-        this.draggable(elements)
+        this.state.texts.push(
+            this.paper.text(50 + this.state.boxes.length * 10, 50, 'sometext')
+        )
+
+        const elements = this.paper.set([...this.state.boxes])
+        const texts = this.paper.set([...this.state.texts])
+
+        this.draggable(elements, texts)
         this.selectItems(elements)
     }
-
     
-    render() {
-        
+    render() {   
         return (
             <div className={'flowpage'}>
                 <Tools addbox={() => this.addBox()} />
