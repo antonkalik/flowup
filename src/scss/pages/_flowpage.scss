@@ -23,7 +23,15 @@
         -webkit-transition: width .4s;
     }
     #chart {
-        flex-grow: 5;
+        flex-grow: 6;
+        overflow: hidden;
+        .handle {
+            border: 2px solid $gray;
+            width: 200px;
+            height: 100px;
+            border-radius: 4px;
+            background-color: $white;
+        }
         svg {
             flex-grow: 1;
         }
