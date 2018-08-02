@@ -7,7 +7,7 @@
         flex-grow: 1;
         display: flex;
         flex: 1;
-        flex-flow: column;
+        flex-flow: row;
         flex-direction: row;
         p {
             margin: 20px;
@@ -24,5 +24,8 @@
     }
     #chart {
         flex-grow: 5;
+        svg {
+            flex-grow: 1;
+        }
     }
 }

@@ -9,7 +9,8 @@ export class FlowPage extends Component {
         this.state = {
             chart: false,
             boxes: [],
-            circles: []
+            circles: [],
+            boxSelected: false
         }
     }
 
@@ -33,7 +34,7 @@ export class FlowPage extends Component {
         const { circles } = this.state
 
         const clickByElement = element => {
-            document.getElementById('panel').style.width = '200px'
+            this.setState({boxSelected: true})
         }
 
         const drag = function() {
@@ -100,7 +101,7 @@ export class FlowPage extends Component {
             })
             circles.hide()
 
-            document.getElementById('panel').style.width = '0px'
+            this.setState({boxSelected: false})
         })
     }
 
@@ -136,7 +137,9 @@ export class FlowPage extends Component {
                     <div id={'chart'}>
                         
                     </div>
-                    <div id={'panel'} />
+                        {
+                            this.state.boxSelected ? <div id={'panel'} style={{width: 300, flexGrow: 1}} /> : <div id={'panel'} style={{width: 0, flexGrow: 0}} />
+                        }
                 </div>
             </div>
         )
