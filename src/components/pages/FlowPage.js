@@ -7,19 +7,15 @@ export class FlowPage extends Component {
         super(props)
         this.paper = null
         this.state = { boxes: [], boxSelected: false }
-        this.handleDrag = this.handleDrag.bind(this);
     }
 
-    handleDrag() {
+    selectItem() {
         this.setState({boxSelected: true})
     }
 
-    eventLogger() {
-        console.log(this)
-    }
-
     addBox() {
-        const box = <Draggable
+        const box = 
+            <Draggable
                 key={this.state.boxes.length}
                 handle=".handle"
                 defaultPosition={{x: 20, y: 20}}
@@ -27,13 +23,8 @@ export class FlowPage extends Component {
                 onStart={this.handleStart}
                 onDrag={this.handleDrag}
                 onStop={this.handleStop}
-               
             >
-            <div onClick={e => {
-                console.log(e.target)
-                this.setState({boxSelected: true})
-            }}>
-                <div className={'handle'}>
+                <div onClick={e => this.selectItem(e)} className={'handle'}>
                     <div className={'box'}>
                         <div className={'boxHead'}>
                             <h3>Init</h3>
@@ -47,12 +38,11 @@ export class FlowPage extends Component {
                             </div>
                         </div>
                         <div className={'boxFooter'}>
-                            <input onChange={() => console.log(this)} value={'10'} />
+                            <input onChange={() => {}} value={'10'} />
                         </div>
                     </div>
                 </div>
-            </div>
-        </Draggable>
+            </Draggable>
 
         this.setState(prevState => ({
             boxes: [...prevState.boxes, box]
@@ -64,13 +54,17 @@ export class FlowPage extends Component {
             <div className={'flowpage'}>
                 <Tools addbox={() => this.addBox()} />
                 <div className={'flowchart'}>
-                    <div onClick={e => this.setState({boxSelected: false})} id={'chart'}>
+                    <div 
+                        id={'chart'}
+                        onClick={e => e.target.className === 'chart' ? this.setState({boxSelected: false}) : null}
+                        className={'chart'}
+                    >
                         {
                             !this.state.boxes ? <p>No elements</p> : this.state.boxes.map(el => el)
                         }
                     </div>
                     {
-                        this.state.boxSelected ? <div id={'panel'} style={{width: 200, flexGrow: 1}} /> : <div id={'panel'} style={{width: 0, flexGrow: 0}} />
+                        this.state.boxSelected ? <div id={'panel'} style={{width: 200}} /> : <div id={'panel'} style={{width: 0}} />
                     } 
                 </div>
             </div>
