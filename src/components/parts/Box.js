@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Tools } from '../'
-import Draggable, {DraggableCore} from 'react-draggable';
+
 
 export default class Box extends Component {
     constructor(props) {
@@ -10,16 +9,8 @@ export default class Box extends Component {
     
     render() {        
         return (
-            <Draggable
-                handle={'.handle'}
-                defaultPosition={{x: 20, y: 20}}
-                position={null}
-                onStart={this.handleStart}
-                onDrag={this.handleDrag}
-                onStop={this.handleStop}
-                someprops={'someprops'}
-            >
-                <div onClick={() => console.log(this)} className={'handle'} ref={this.handleRef}>
+            
+                
                     <div className={'box'}>
                         <div className={'boxHead'}>
                             <h3>Init</h3>
@@ -36,8 +27,6 @@ export default class Box extends Component {
                             <input onChange={() => {}} value={'10'} />
                         </div>
                     </div>
-                </div>
-            </Draggable>
         )
     }
 }

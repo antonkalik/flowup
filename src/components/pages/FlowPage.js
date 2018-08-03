@@ -12,7 +12,7 @@ export class FlowPage extends Component {
     }
 
     selectItem() {
-        console.log(this.handleRef)
+        console.log(this.handleRef.current)
         this.setState({boxSelected: true})
     }
 
@@ -33,7 +33,23 @@ export class FlowPage extends Component {
                         className={'chart'}
                     >
                         {
-                            !this.state.boxes ? <p>No elements</p> : this.state.boxes.map(el => el)
+                            !this.state.boxes ? <p>No elements</p> : this.state.boxes.map(el => {
+                                return (
+                                    <Draggable
+                                        handle={'.handle'}
+                                        defaultPosition={{x: 20, y: 20}}
+                                        position={null}
+                                        onStart={this.handleStart}
+                                        onDrag={this.handleDrag}
+                                        onStop={this.handleStop}
+                                        someprops={'someprops'}
+                                    >
+                                        <div onClick={() => this.selectItem()} className={'handle'} ref={this.handleRef}>
+                                            {el}
+                                        </div>
+                                    </Draggable>
+                                )
+                            })
                         }
                     </div>
                         {
