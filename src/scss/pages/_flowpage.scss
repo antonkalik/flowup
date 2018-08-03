@@ -24,7 +24,7 @@
             background-color: $white;
             cursor: grab;
         }
-        .handle.selected {
+        .selected {
             z-index: 100;
             border: 2px solid blue;
             position: absolute;
