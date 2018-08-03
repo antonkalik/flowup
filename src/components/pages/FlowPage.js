@@ -11,6 +11,7 @@ export class FlowPage extends Component {
     }
 
     selectItem() {
+        // redux for this state
         this.setState({boxSelected: true})
     }
  
@@ -20,11 +21,8 @@ export class FlowPage extends Component {
             <Box 
                 value={this.state.value}
                 key={this.state.boxes.length}
-                ref={this.handleRef}
             />]
         }))
-
-        
     }
     
     render() {
