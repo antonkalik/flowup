@@ -1,6 +1,5 @@
 import React, { Component, createRef } from 'react'
 import { Tools } from '../'
-import Draggable from 'react-draggable';
 import Box from '../parts/Box'
 
 export class FlowPage extends Component {
@@ -13,13 +12,19 @@ export class FlowPage extends Component {
 
     selectItem() {
         this.setState({boxSelected: true})
-        console.log(this.handleRef.current)
     }
  
     addBox() {
         this.setState(prevState => ({
-            boxes: [...prevState.boxes, <Box selected={this.state.boxSelected} value={this.state.value} key={this.state.boxes.length} />]
+            boxes: [...prevState.boxes,
+            <Box 
+                value={this.state.value}
+                key={this.state.boxes.length}
+                ref={this.handleRef}
+            />]
         }))
+
+        
     }
     
     render() {
@@ -33,26 +38,7 @@ export class FlowPage extends Component {
                         className={'chart'}
                     >
                         {
-                            !this.state.boxes ? <p>No elements</p> : this.state.boxes.map((el, i) => {
-                                return (
-                                    <Draggable
-                                        key={this.state.boxes.length}
-                                        handle={'.handle'}
-                                        defaultPosition={{x: 20, y: 20}}
-                                        position={null}
-                                        onStart={this.handleStart}
-                                        onDrag={this.handleDrag}
-                                        onStop={this.handleStop}
-                                        index={i}
-                                        value={this.state.value}
-                                        ref={this.handleRef}
-                                    >
-                                        <div onClick={() => this.selectItem()} className={'handle'} ref={this.handleRef}>
-                                            {el}
-                                        </div>
-                                    </Draggable>
-                                )
-                            })
+                            !this.state.boxes ? <p>No elements</p> : this.state.boxes.map(el => el)
                         }
                     </div>
                         {
