@@ -1,7 +1,10 @@
 import { createReducer } from '../utils';
 import { ADD_BOX, SET_ACTIVE_BOX, ADD_RELATION, DELETE_RELATION, UPDATE_BOX_POSITION } from './constants';
 
-const initialState = {}
+const initialState = {
+  boxes: [],
+  relations: []
+}
 
 export default createReducer(initialState, {
   [ADD_BOX]: (state, action) => {

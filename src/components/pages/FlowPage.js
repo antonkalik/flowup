@@ -3,12 +3,18 @@ import { connect } from 'react-redux';
 import RenderRelation from '../parts/RenderRelation';
 import RenderBox from '../parts/RenderBox';
 import { addBox, updateBoxPosition } from '../../redux/actions';
+import { Tools } from '../parts/Tools'
 
 class FlowPage extends PureComponent {
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
     static getDerivedStateFromProps(props, state) {
         return {
             ...state,
             boxesList: Object.values(props.boxes),
+            relations: Object.values(props.relations),
         };
     }
 
@@ -18,15 +24,13 @@ class FlowPage extends PureComponent {
             <Tools addbox={() => this.props.addBox()} />
             <div className={'flowchart'}>
                 <div className={'chart'}>
-                    <div className={'box'}>
-                        {
+                {
                             this.state.boxesList.map((box) => {
                             return (
                                 <RenderBox key={`box-${box.id}`} box={box} />
                                 );
                             })
                         }
-                    </div>
                     <svg>
                         {
                             this.props.relations.map((relation) => {
@@ -47,8 +51,7 @@ class FlowPage extends PureComponent {
 }
 
 
-const mapStateToProps = (state, props) => {
-    console.log(state)
+const mapStateToProps = (state) => {
     return {
         relations: state.paper.relations,
         boxes: state.paper.boxes,
@@ -57,7 +60,6 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateBoxPosition: (position) => dispatch(updateBoxPosition(position)),
     addBox: (position) => dispatch(addBox(position)),
   };
 };

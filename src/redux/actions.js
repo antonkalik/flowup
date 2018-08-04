@@ -1,4 +1,6 @@
-import { ADD_BOX, SET_ACTIVE_BOX, ADD_RELATION, DELETE_RELATION, UPDATE_BOX_POSITION } from './constants';
+import { ADD_BOX, SET_ACTIVE_BOX, ADD_RELATION, DELETE_RELATION, UPDATE_BOX_POSITION, DEFAULT_TYPE } from './constants';
+
+
 
 const generateId = () => `${Math.random() * 1000}-${new Date().getTime()}`;
 const generatePositon = () => ({ x: 20, y: 20 });
@@ -24,7 +26,6 @@ export const setActiveBox = (activeBoxId) => {
     },
   };
 };
-
 
 export const addRelation = (formBox, toBox) => {
   return {
@@ -52,6 +53,7 @@ export const deleteRelation = (formBox, toBox) => {
 
 
 export const updateBoxPosition = (boxId, position) => {
+  console.log(position)
   return {
     type: UPDATE_BOX_POSITION,
     data: {

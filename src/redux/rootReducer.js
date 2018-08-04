@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux'
-import reducers from './reducers';
+import paperReducer from './paperReducer';
 
-export default combineReducers({ reducers });
+export default combineReducers({ paper: paperReducer });
