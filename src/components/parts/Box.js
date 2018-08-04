@@ -12,7 +12,7 @@ export default class Box extends Component {
 
     handleStart() {
         // redux for this state just to catch state of select for up component
-        this.setState({ select: !this.state.select })
+        this.setState({ select: true })
     }
     
     render() {
