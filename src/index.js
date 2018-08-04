@@ -4,10 +4,12 @@ import { render } from 'react-dom'
 import { BrowserRouter as Router, withRouter } from 'react-router-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { reducer } from './store/reducers'
+import rootReducer from './redux/rootReducer'
 import App from './App'
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+window.store = store;
 
 render(
     <Router>

@@ -1,99 +1,65 @@
-import React, { Component, createRef } from 'react'
-import { Tools } from '../'
-import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { addBox, boxSelect, changeSecond } from '../../store/actions'
-import Box from '../parts/Box'
-import Draggable from 'react-draggable';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import RenderRelation from '../parts/RenderRelation';
+import RenderBox from '../parts/RenderBox';
+import { addBox, updateBoxPosition } from '../../redux/actions';
 
-class FlowPage extends Component {
-    constructor(props) {
-        super(props)
-        this.handleRef = createRef()
-    }
-
-    clickByItem() {
-        console.log(this)
-        this.children.ref.current.style.border = '2px solid blue'
+class FlowPage extends PureComponent {
+    static getDerivedStateFromProps(props, state) {
+        return {
+            ...state,
+            boxesList: Object.values(props.boxes),
+        };
     }
 
-    selectItem() {
-        this.props.boxSelect(true)
-    }
-    
-    addBoxToPaper() {
-        this.props.addBox(
-            <Draggable
-                key={this.props.state.boxes.length}
-                handle={'.handle '}
-                defaultPosition={{x: 20, y: 20}}
-                position={null}
-                onStart={this.clickByItem}
-                onDrag={this.handleDrag}
-                onStop={this.handleStop}
-            >
-                <div key={this.props.state.boxes.length} className={'box'} onClick={() => this.selectItem()} ref={this.handleRef}>
-                    <div className={'handle'}>
-                        <div className={'boxHead'}>
-                                <h3>Init</h3>
-                        </div>
-                    </div>
-                    <div className={'boxContent'}>
-                        <div className={'boxBody'}>
-                            <div className={'boxIn'}>
-                                In
-                            </div>
-                            <div className={'BoxOut'}>
-                                Out
-                            </div>
-                        </div>
-                        <div className={'boxFooter'}>
-                            <input onChange={() => {}} value={10} />
-                        </div>
-                    </div>
-                </div>
-            </Draggable>
-        )
-    }
-    
     render() {
-        const { boxes, boxSelect } = this.props.state
         return (
             <div className={'flowpage'}>
-                <Tools addbox={() => this.addBoxToPaper()} />
-                <div className={'flowchart'}>
-                    <div 
-                        id={'chart'}
-                        onClick={e => e.target.className === 'chart' ? this.props.boxSelect(false) : null}
-                        className={'chart'}
-                    >
+            <Tools addbox={() => this.props.addBox()} />
+            <div className={'flowchart'}>
+                <div className={'chart'}>
+                    <div className={'box'}>
                         {
-                            boxes.length === 0 ? <p>No elements</p> : boxes.map(el => el)
+                            this.state.boxesList.map((box) => {
+                            return (
+                                <RenderBox key={`box-${box.id}`} box={box} />
+                                );
+                            })
                         }
                     </div>
+                    <svg>
                         {
-                            boxSelect ? <div id={'panel'} style={{width: 200}} /> : <div id={'panel'} style={{width: 0}} />
+                            this.props.relations.map((relation) => {
+                                return (
+                                    <RenderRelation
+                                        key={`${relation.fromBox}-${relation.toBox}`}
+                                        relation={relation}
+                                    />
+                                );
+                            })
                         }
+                    </svg>
                 </div>
             </div>
-        )
+            </div>
+        );
     }
 }
 
-const mapStateToProps = state => {
-    return { state }
-}
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = (state, props) => {
+    console.log(state)
     return {
-        addBox: bindActionCreators(addBox, dispatch),
-        boxSelect: bindActionCreators(boxSelect, dispatch),
-        changeSecond: bindActionCreators(changeSecond, dispatch)
-    }
-}
+        relations: state.paper.relations,
+        boxes: state.paper.boxes,
+    };
+};
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(FlowPage)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateBoxPosition: (position) => dispatch(updateBoxPosition(position)),
+    addBox: (position) => dispatch(addBox(position)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FlowPage);
