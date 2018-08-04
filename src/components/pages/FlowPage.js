@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addBox, boxSelect, changeSecond } from '../../store/actions'
 import Box from '../parts/Box'
+import Draggable from 'react-draggable';
 
 class FlowPage extends Component {
     constructor(props) {
@@ -12,17 +13,52 @@ class FlowPage extends Component {
         this.handleRef = createRef()
     }
 
+    clickByItem() {
+        console.log(this)
+        this.children.ref.current.style.border = '2px solid blue'
+    }
+
     selectItem() {
         this.props.boxSelect(true)
     }
- 
+    
     addBoxToPaper() {
-        this.props.addBox([
-            <Box key={this.props.state.boxes.length} {...this.props} onClick={this.selectItem.bind(this)} />
-        ])
+        this.props.addBox(
+            <Draggable
+                key={this.props.state.boxes.length}
+                handle={'.handle '}
+                defaultPosition={{x: 20, y: 20}}
+                position={null}
+                onStart={this.clickByItem}
+                onDrag={this.handleDrag}
+                onStop={this.handleStop}
+            >
+                <div key={this.props.state.boxes.length} className={'box'} onClick={() => this.selectItem()} ref={this.handleRef}>
+                    <div className={'handle'}>
+                        <div className={'boxHead'}>
+                                <h3>Init</h3>
+                        </div>
+                    </div>
+                    <div className={'boxContent'}>
+                        <div className={'boxBody'}>
+                            <div className={'boxIn'}>
+                                In
+                            </div>
+                            <div className={'BoxOut'}>
+                                Out
+                            </div>
+                        </div>
+                        <div className={'boxFooter'}>
+                            <input onChange={() => {}} value={10} />
+                        </div>
+                    </div>
+                </div>
+            </Draggable>
+        )
     }
     
     render() {
+        const { boxes, boxSelect } = this.props.state
         return (
             <div className={'flowpage'}>
                 <Tools addbox={() => this.addBoxToPaper()} />
@@ -33,11 +69,11 @@ class FlowPage extends Component {
                         className={'chart'}
                     >
                         {
-                            this.props.state.boxes.length === 0 ? <p>No elements</p> : this.props.state.boxes.map(el => el)
+                            boxes.length === 0 ? <p>No elements</p> : boxes.map(el => el)
                         }
                     </div>
                         {
-                            this.props.state.boxSelect ? <div id={'panel'} style={{width: 200}} /> : <div id={'panel'} style={{width: 0}} />
+                            boxSelect ? <div id={'panel'} style={{width: 200}} /> : <div id={'panel'} style={{width: 0}} />
                         }
                 </div>
             </div>
@@ -58,6 +94,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(FlowPage)
