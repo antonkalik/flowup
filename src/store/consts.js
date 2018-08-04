@@ -1,0 +1,3 @@
+export const ADD_BOX = 'ADD_BOX'
+export const BOX_SELECT = 'BOX_SELECT'
+export const ACTION_CHANGE_SECOND = 'ACTION_CHANGE_SECOND'

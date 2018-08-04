@@ -2,44 +2,17 @@ import './scss/styles.scss'
 import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router, withRouter } from 'react-router-dom'
-import App from './App'
 import { createStore } from 'redux'
-import { connect, Provider } from 'react-redux'
+import { Provider } from 'react-redux'
+import { reducer } from './store/reducers'
+import App from './App'
 
-const initialState = {
-    first: 'One',
-    second: 'Two'
-}
-
-const ACTION_CHANGE_FIRST = 'ACTION_CHANGE_FIRST'
-const ACTION_CHANGE_SECOND = 'ACTION_CHANGE_SECOND'
-
-const actionChangeFirst = {
-    type: ACTION_CHANGE_FIRST,
-    payload: null
-}
-
-const actionChangeSecond = {
-    type: ACTION_CHANGE_SECOND,
-    payload: null
-}
-
-const rootReducer = (state = initialState, action) => {
-    return state
-}
-
-const store = createStore(rootReducer)
-
-const mapStateToProps = state => {
-    return { state }
-}
-
-const WrappedMainComponent = withRouter(connect(mapStateToProps)(App))
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 render(
     <Router>
         <Provider store={store}>
-            <WrappedMainComponent />
+            <App />
         </Provider>
     </Router>,
     document.getElementById('root')

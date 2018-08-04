@@ -9,11 +9,6 @@ export default class Box extends Component {
             select: false
         }
     }
-
-    handleStart() {
-        // redux for this state just to catch state of select for up component
-        this.setState({ select: true })
-    }
     
     render() {
         const { value } = this.props
@@ -22,12 +17,12 @@ export default class Box extends Component {
                 handle={'.handle'}
                 defaultPosition={{x: 20, y: 20}}
                 position={null}
-                onStart={this.handleStart.bind(this)}
+                onStart={() => this.props.onClick()}
                 onDrag={this.handleDrag}
                 onStop={this.handleStop}
                 ref={this.handleRef}
             >
-                <div className={this.state.select ? 'handle selected' : 'handle'} ref={this.handleRef}>
+                <div className={this.props.state.boxSelect ? 'handle selected' : 'handle'} ref={this.handleRef}>
                 <div className={'box'}>
                     <div className={'boxHead'}>
                         <h3>Init</h3>
