@@ -1,14 +1,14 @@
 import './scss/styles.scss'
 import React from 'react'
 import { render } from 'react-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, withRouter } from 'react-router-dom'
 import App from './App'
 import { createStore } from 'redux'
 import { connect, Provider } from 'react-redux'
 
 const initialState = {
-    first: '',
-    second: ''
+    first: 'One',
+    second: 'Two'
 }
 
 const ACTION_CHANGE_FIRST = 'ACTION_CHANGE_FIRST'
@@ -31,13 +31,10 @@ const rootReducer = (state = initialState, action) => {
 const store = createStore(rootReducer)
 
 const mapStateToProps = state => {
-    return {
-        first: state.first,
-        second: state.second
-    }
+    return { state }
 }
 
-const WrappedMainComponent = connect(mapStateToProps)(App)
+const WrappedMainComponent = withRouter(connect(mapStateToProps)(App))
 
 render(
     <Router>
