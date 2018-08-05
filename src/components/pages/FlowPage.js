@@ -25,8 +25,7 @@ class FlowPage extends PureComponent {
     }
 
     render() {
-        const { activeBox } = this.props
-
+        const { activeBoxId, relations } = this.props
         return (
             <div className={'flowpage'}>
                 <Tools />
@@ -39,7 +38,7 @@ class FlowPage extends PureComponent {
                     }
                     <svg>
                         {
-                            this.props.relations.map((relation) => {
+                            relations.map((relation) => {
                                 return (
                                     <Relations
                                         key={`${relation.fromBox}${relation.toBox}`}
@@ -50,7 +49,9 @@ class FlowPage extends PureComponent {
                         }
                     </svg>
                 </div>
-                <Panel />
+                        {
+                            activeBoxId ? <Panel activeBoxId={activeBoxId} /> : null
+                        }
                 </div>
             </div>
         )
@@ -58,12 +59,11 @@ class FlowPage extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { relations, boxes, activeBox } = state
-    console.log(activeBox)
+    const { relations, boxes, activeBoxId } = state
     return {
         relations,
         boxes,
-        activeBox
+        activeBoxId
     }
 }
 

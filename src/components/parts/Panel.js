@@ -7,13 +7,13 @@ class Panel extends PureComponent {
     static getDerivedStateFromProps(props, state) {
         return {
             ...state,
-            value: 'props.box.value',
+            value: props.box.value,
         }
     }
 
     onChangeValue = (e) => {
-        this.setState((state) => ({
-            ...state,
+        this.setState((prevState) => ({
+            ...prevState,
             value: e.target.value,
         }))
         this.props.updateBoxValue(e.target.value)
@@ -21,7 +21,6 @@ class Panel extends PureComponent {
 
     render() {
         const { box } = this.props
-        console.log(this.props)
         return (
             <div className={'panel'}>
                 <div className={'panelContent'}>
@@ -36,17 +35,15 @@ class Panel extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-
     return {
-        activeBox: state.activeBox,
-        box: state.boxes[state.activeBox],
+        box: state.boxes[state.activeBoxId],
     }
 }
 
-const mapDispatchToProps = (dispatch, { box }) => {
+const mapDispatchToProps = (dispatch, { activeBoxId }) => {
     return {
-        updateBoxValue: (value) => dispatch(updateBoxValue(box.id, value)),
-        removeBox: () => dispatch(removeBox(box.id)),
+        updateBoxValue: (value) => dispatch(updateBoxValue(activeBoxId, value)),
+        removeBox: () => dispatch(removeBox(activeBoxId)),
     }
 }
 

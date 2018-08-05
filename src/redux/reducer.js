@@ -10,7 +10,6 @@ const initialState = {
             value: 0
         },
     },
-    activeBox: {},
     relations: []
 }
 
