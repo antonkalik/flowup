@@ -17,33 +17,33 @@ class FlowPage extends PureComponent {
     render() {
         return (
             <div className={'flowpage'}>
-            <Tools addbox={() => this.props.addBox()} />
-            <div className={'flowchart'}>
-                <div className={'chart'}>
-                    {
-                        this.state.boxesList.map((box) => {
-                        return (
-                            <RenderBox key={`box-${box.id}`} box={box} />
-                            );
-                        })
-                    }
-                    <svg>
+                <Tools addbox={() => this.props.addBox()} />
+                <div className={'flowchart'}>
+                    <div className={'chart'}>
                         {
-                            this.props.relations.map((relation) => {
-                                return (
-                                    <RenderRelation
-                                        key={`${relation.fromBox}-${relation.toBox}`}
-                                        relation={relation}
-                                    />
+                            this.state.boxesList.map((box) => {
+                            return (
+                                <RenderBox key={`box-${box.id}`} box={box} />
                                 );
                             })
                         }
-                    </svg>
+                        <svg>
+                            {
+                                this.props.relations.map((relation) => {
+                                    return (
+                                        <RenderRelation
+                                            key={`${relation.fromBox}${relation.toBox}`}
+                                            relation={relation}
+                                        />
+                                    );
+                                })
+                            }
+                        </svg>
+                    </div>
+                    {
+                        this.props.isAnyBoxesActive ? <div id={'panel'} style={{width: 200}} /> : <div id={'panel'} style={{width: 0}} />
+                    }
                 </div>
-                {
-                    this.props.isAnyBoxesActive ? <div id={'panel'} style={{width: 200}} /> : <div id={'panel'} style={{width: 0}} />
-                }
-            </div>
             </div>
         );
     }
@@ -53,14 +53,14 @@ const mapStateToProps = (state) => {
     return {
         relations: state.reducers.relations,
         boxes: state.reducers.boxes,
-        isAnyBoxesActive: !!state.reducers.activeBoxId
+        isAnyBoxesActive: state.reducers.activeBoxId
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    addBox: (position) => dispatch(addBox(position)),
-  };
+    return {
+        addBox: (position) => dispatch(addBox(position)),
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FlowPage);
