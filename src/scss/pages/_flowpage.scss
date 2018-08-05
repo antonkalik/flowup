@@ -13,6 +13,7 @@
         .chart {
             flex-grow: 3;
             overflow: hidden;
+            z-index: 1;
         }
     }
 }

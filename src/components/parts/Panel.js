@@ -3,19 +3,8 @@ import { connect } from 'react-redux'
 import { updateBoxValue, removeBox } from '../../redux/actions'
 
 class Panel extends PureComponent {
-    state = {}
-    static getDerivedStateFromProps(props, state) {
-        return {
-            ...state,
-            value: props.box.value,
-        }
-    }
 
     onChangeValue = (e) => {
-        this.setState((prevState) => ({
-            ...prevState,
-            value: e.target.value,
-        }))
         this.props.updateBoxValue(e.target.value)
     }
 
@@ -25,7 +14,7 @@ class Panel extends PureComponent {
             <div className={'panel'}>
                 <div className={'panelContent'}>
                     <h3>{box.type}</h3>
-                    <input type={'number'} value={this.state.value} onKeyPress={this.onChangeValue} />
+                    <input type={'number'} value={box.value} onChange={this.onChangeValue} />
                     <button>Accept</button>
                     <button>Remove</button>
                 </div>
