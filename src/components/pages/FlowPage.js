@@ -2,14 +2,10 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import RenderRelation from '../parts/RenderRelation';
 import RenderBox from '../parts/RenderBox';
-import { addBox, updateBoxPosition } from '../../redux/actions';
+import { addBox } from '../../redux/actions';
 import { Tools } from '../parts/Tools'
 
 class FlowPage extends PureComponent {
-    constructor(props) {
-        super(props)
-        this.state = {}
-    }
     static getDerivedStateFromProps(props, state) {
         return {
             ...state,
@@ -24,13 +20,13 @@ class FlowPage extends PureComponent {
             <Tools addbox={() => this.props.addBox()} />
             <div className={'flowchart'}>
                 <div className={'chart'}>
-                {
-                            this.state.boxesList.map((box) => {
-                            return (
-                                <RenderBox key={`box-${box.id}`} box={box} />
-                                );
-                            })
-                        }
+                    {
+                        this.state.boxesList.map((box) => {
+                        return (
+                            <RenderBox key={`box-${box.id}`} box={box} />
+                            );
+                        })
+                    }
                     <svg>
                         {
                             this.props.relations.map((relation) => {
@@ -44,17 +40,20 @@ class FlowPage extends PureComponent {
                         }
                     </svg>
                 </div>
+                {
+                    this.props.isAnyBoxesActive ? <div id={'panel'} style={{width: 200}} /> : <div id={'panel'} style={{width: 0}} />
+                }
             </div>
             </div>
         );
     }
 }
 
-
 const mapStateToProps = (state) => {
     return {
-        relations: state.paper.relations,
-        boxes: state.paper.boxes,
+        relations: state.reducers.relations,
+        boxes: state.reducers.boxes,
+        isAnyBoxesActive: !!state.reducers.activeBoxId
     };
 };
 

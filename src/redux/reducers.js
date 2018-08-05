@@ -2,19 +2,20 @@ import { createReducer } from '../utils';
 import { ADD_BOX, SET_ACTIVE_BOX, ADD_RELATION, DELETE_RELATION, UPDATE_BOX_POSITION } from './constants';
 
 const initialState = {
-  boxes: [],
+  boxes: {},
   relations: []
 }
 
 export default createReducer(initialState, {
   [ADD_BOX]: (state, action) => {
-    return {
-      ...state,
-      boxes: {
-        [action.data.box.id]: action.data.box,
-      },
-    };
-  },
+    return {
+      ...state,
+      boxes: {
+        ...state.boxes,
+        [action.data.box.id]: action.data.box,
+      },
+    };
+  },
 
   [SET_ACTIVE_BOX]: (state, action) => {
     return {

@@ -18,6 +18,7 @@
             padding: 10px;
             font-weight: bold;
             cursor: grab;
+            cursor: -webkit-grab;
             z-index: 1
         }
         .react-draggable-dragging {
@@ -45,19 +46,16 @@
         
         #panel {
             background-color: $light;
-            flex-grow: 0;
             width: 0px;
             border-left: 2px solid $gray;
             transition: width .4s;
             -webkit-transition: width .4s;
+            z-index: 1000;
         }
         
-        #chart {
-            flex-grow: 6;
+        .chart {
+            flex-grow: 3;
             overflow: hidden;
-            svg {
-                flex-grow: 1;
-            }
         }
     }
 }

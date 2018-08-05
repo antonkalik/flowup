@@ -28,7 +28,6 @@ class RenderBox extends PureComponent {
   }
 
   render() {
-    console.log(this.props)
     return (
       <Draggable
         handle={'.handle'}
@@ -37,9 +36,13 @@ class RenderBox extends PureComponent {
         onDrag={this.onDrag}
         onStart={this.onStart}
       >
-        <div className={this.props.isBoxActive ? 'active' : 'inactive'}>
+        <div className={this.props.isBoxActive ? 'box selected' : 'box'}>
           <div className={'handle'}>Drag from here</div>
-          <div>This readme is really dragging on...</div>
+          <div>
+            <div>In</div>
+            <div>Out</div>
+            <input value={100} onChange={(e) => console.log(e.target.value)} />
+          </div>
         </div>
       </Draggable>
     );
@@ -48,7 +51,7 @@ class RenderBox extends PureComponent {
 
 const mapStateToProps = (state, { box }) => {
   return {
-    isBoxActive: state.paper.activeBoxId === box.id,
+    isBoxActive: state.reducers.activeBoxId === box.id,
   };
 };
 

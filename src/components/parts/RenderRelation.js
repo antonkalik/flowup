@@ -27,8 +27,8 @@ class RenderRelation extends PureComponent {
 
 const mapStateToProps = (state, { relation }) => {
   return {
-    fromBox: state.paper.boxes[relation.fromBox],
-    toBox: state.paper.boxes[relation.toBox],
+    fromBox: state.reducers.boxes[relation.fromBox],
+    toBox: state.reducers.boxes[relation.toBox],
   };
 };
 
