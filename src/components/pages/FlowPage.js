@@ -1,49 +1,66 @@
-import React, { Component, createRef } from 'react'
-import { Tools } from '../'
-import Box from '../parts/Box'
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import RenderRelation from '../parts/RenderRelation';
+import RenderBox from '../parts/RenderBox';
+import { addBox } from '../../redux/actions';
+import { Tools } from '../parts/Tools'
 
-export class FlowPage extends Component {
-    constructor(props) {
-        super(props)
-        this.handleRef = createRef()
-        this.paper = null
-        this.state = { boxes: [], boxSelected: false, value: 10 }
+class FlowPage extends PureComponent {
+    static getDerivedStateFromProps(props, state) {
+        return {
+            ...state,
+            boxesList: Object.values(props.boxes),
+            relations: Object.values(props.relations),
+        };
     }
 
-    selectItem() {
-        // redux for this state
-        this.setState({boxSelected: true})
-    }
- 
-    addBox() {
-        this.setState(prevState => ({
-            boxes: [...prevState.boxes,
-            <Box 
-                value={this.state.value}
-                key={this.state.boxes.length}
-            />]
-        }))
-    }
-    
     render() {
         return (
             <div className={'flowpage'}>
-                <Tools addbox={() => this.addBox()} />
+                <Tools addbox={() => this.props.addBox()} />
                 <div className={'flowchart'}>
-                    <div 
-                        id={'chart'}
-                        onClick={e => e.target.className === 'chart' ? this.setState({boxSelected: false}) : null}
-                        className={'chart'}
-                    >
+                    <div className={'chart'}>
                         {
-                            !this.state.boxes ? <p>No elements</p> : this.state.boxes.map(el => el)
+                            this.state.boxesList.map((box) => {
+                            return (
+                                <RenderBox key={`box-${box.id}`} box={box} />
+                                );
+                            })
                         }
+                        <svg>
+                            {
+                                this.props.relations.map((relation) => {
+                                    return (
+                                        <RenderRelation
+                                            key={`${relation.fromBox}${relation.toBox}`}
+                                            relation={relation}
+                                        />
+                                    );
+                                })
+                            }
+                        </svg>
                     </div>
-                        {
-                            this.state.boxSelected ? <div id={'panel'} style={{width: 200}} /> : <div id={'panel'} style={{width: 0}} />
-                        }
+                    {
+                        this.props.isAnyBoxesActive ? <div id={'panel'} style={{width: 200}} /> : <div id={'panel'} style={{width: 0}} />
+                    }
                 </div>
             </div>
-        )
+        );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        relations: state.reducers.relations,
+        boxes: state.reducers.boxes,
+        isAnyBoxesActive: state.reducers.activeBoxId
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addBox: (position) => dispatch(addBox(position)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FlowPage);
