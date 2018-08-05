@@ -49,9 +49,7 @@ class FlowPage extends PureComponent {
                         }
                     </svg>
                 </div>
-                        {
-                            activeBoxId ? <Panel activeBoxId={activeBoxId} /> : null
-                        }
+                    <Panel activeBoxId={activeBoxId} />
                 </div>
             </div>
         )

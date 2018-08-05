@@ -44,9 +44,10 @@ export default createReducer(initialState, {
         delete state.boxes[boxId]
         return {
             ...state,
+            activeBoxId: null,
             boxes: {
                 ...state.boxes,
-            }
+            },
         }
     },
 

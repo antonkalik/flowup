@@ -10,15 +10,16 @@ class Panel extends PureComponent {
 
     render() {
         const { box } = this.props
+        console.log(box)
         return (
-            <div className={'panel'}>
+            box ? <div className={'panel'}>
                 <div className={'panelContent'}>
                     <h3>{box.type}</h3>
                     <input type={'number'} value={box.value} onChange={this.onChangeValue} />
                     <button>Accept</button>
                     <button>Remove</button>
                 </div>
-            </div>
+            </div> : null
         )
     }
 }
