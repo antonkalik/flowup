@@ -7,7 +7,7 @@ import { Tools } from '../parts/Tools'
 
 class FlowPage extends PureComponent {
     state = {}
-    
+
     static getDerivedStateFromProps(props, state) {
         return {
             ...state,

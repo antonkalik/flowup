@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { updateBoxPosition, setActiveBox } from '../../redux/actions';
+import { updateBoxPosition, setActiveBox, removeBox } from '../../redux/actions';
 import Draggable from 'react-draggable'
 
 // const getFromPositon = (boxPositon) => {
@@ -27,6 +27,10 @@ class RenderBox extends PureComponent {
     this.props.setActiveBox();
   }
 
+  onRemove = () => {
+    this.props.removeBox()
+  }
+
   render() {
     return (
       <Draggable
@@ -37,7 +41,12 @@ class RenderBox extends PureComponent {
         onStart={this.onStart}
       >
         <div className={this.props.isBoxActive ? 'box selected' : 'box'}>
-          <div className={'handle'}>Drag from here</div>
+          <div className={'handle'}>
+            <div className={'boxHead'}>
+                <div><h3>Title</h3></div>
+                <div className={'remove'} onClick={() => this.onRemove()}>X</div>
+              </div>
+          </div>
           <div>
             <div>In</div>
             <div>Out</div>
@@ -59,6 +68,7 @@ const mapDispatchToProps = (dispatch, { box }) => {
   return {
     boxPositon: (position) => dispatch(updateBoxPosition(box.id, position)),
     setActiveBox: () => dispatch(setActiveBox(box.id)),
+    removeBox: () => dispatch(removeBox(box.id)),
   };
 };
 

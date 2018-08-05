@@ -32,6 +32,18 @@
             height: 100px;
             border-radius: 4px;
             background-color: $white;
+            .boxHead {
+                display: flex;
+                flex-direction: row;
+                > div {
+                    flex: 1;
+                    &:nth-child(2) {
+                        flex-grow: 0;
+                        padding: 0 5px;
+                        cursor: pointer
+                    }
+                }
+            }
             .boxContent {
                 width: 200px;
                 position: absolute;
