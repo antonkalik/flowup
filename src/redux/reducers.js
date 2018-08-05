@@ -1,5 +1,5 @@
 import { createReducer } from '../utils';
-import { ADD_BOX, SET_ACTIVE_BOX, ADD_RELATION, DELETE_RELATION, UPDATE_BOX_POSITION } from './constants';
+import { ADD_BOX, SET_ACTIVE_BOX, INACTIVE, ADD_RELATION, DELETE_RELATION, UPDATE_BOX_POSITION } from './constants';
 
 const initialState = {
   boxes: {},
@@ -21,6 +21,13 @@ export default createReducer(initialState, {
     return {
       ...state,
       activeBoxId: action.data.activeBoxId,
+    };
+  },
+
+  [INACTIVE]: (state) => {
+    return {
+      ...state,
+      activeBoxId: false
     };
   },
 

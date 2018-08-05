@@ -2,10 +2,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import RenderRelation from '../parts/RenderRelation';
 import RenderBox from '../parts/RenderBox';
-import { addBox } from '../../redux/actions';
+import { addBox, deActivate } from '../../redux/actions';
 import { Tools } from '../parts/Tools'
 
 class FlowPage extends PureComponent {
+    state = {}
+    
     static getDerivedStateFromProps(props, state) {
         return {
             ...state,
@@ -14,12 +16,19 @@ class FlowPage extends PureComponent {
         };
     }
 
+    // deactivate if any boxes active by click on chart
+    deActivate = (e) => {
+        if (e.target.className === 'chart') {
+            this.props.deAcitvate()
+        }
+    }
+
     render() {
         return (
             <div className={'flowpage'}>
                 <Tools addbox={() => this.props.addBox()} />
                 <div className={'flowchart'}>
-                    <div className={'chart'}>
+                    <div onClick={(e) => this.deActivate(e)} className={'chart'}>
                         {
                             this.state.boxesList.map((box) => {
                             return (
@@ -60,6 +69,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         addBox: (position) => dispatch(addBox(position)),
+        deAcitvate: () => dispatch(deActivate()),
     };
 };
 

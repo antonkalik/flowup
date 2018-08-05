@@ -4,3 +4,4 @@ export const ADD_RELATION = 'ADD_RELATION';
 export const DELETE_RELATION = 'DELETE_RELATION';
 export const UPDATE_BOX_POSITION = 'UPDATE_BOX_POSITION';
 export const DEFAULT_TYPE = 'DEFAULT_TYPE';
+export const INACTIVE = 'INACTIVE';
