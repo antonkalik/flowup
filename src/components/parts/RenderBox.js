@@ -70,7 +70,11 @@ class RenderBox extends PureComponent {
             </div>
           </div>
           <div className={'boxFooter'}>
-            <input type={'number'} value={box.value} onChange={(e) => this.onChangeValue(e.target.value)} />
+            <input 
+              type={'number'}
+              value={box.value}
+              onChange={(e) => this.onChangeValue(e.target.value)}
+            />
           </div>
         </div>
       </Draggable>
