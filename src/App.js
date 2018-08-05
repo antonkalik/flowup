@@ -6,7 +6,7 @@ import { NotFoundPage, Navigation, HomePage, FlowPage, JsonPage, Footer } from '
 const App = () =>
   <div className={'app'}>
     <Navigation />
-    
+
     <div className={'page'}>
       <Switch>
         <Route exact path={routes.HOME} component={HomePage} />

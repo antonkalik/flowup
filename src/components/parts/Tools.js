@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
-import { connect } from 'react-redux';
-import { addBox } from '../../redux/actions';
+import { connect } from 'react-redux'
+import { addBox } from '../../redux/actions'
 
 const tools = [{
         type: 'Division',
@@ -21,16 +21,14 @@ const tools = [{
 
 class Tools extends PureComponent {
     render() {
-        const lastPostion = Object.values(this.props.boxes).slice(-1)[0].position
-        const position = {x: lastPostion.x + 20, y: lastPostion.y}
-        
+
         return (
             <div className={'tools'}>
                 {
-                    tools.map(tool => 
-                        <button 
+                    tools.map(tool =>
+                        <button
                             key={tool.type}
-                            onClick={() => this.props.addBox(tool.type, tool.value, position)}>
+                            onClick={() => this.props.addBox(tool.type, tool.value)}>
                                 {tool.type}
                             </button>
                         )
@@ -42,15 +40,15 @@ class Tools extends PureComponent {
 
 const mapStateToProps = (state) => {
     return {
-        relations: state.reducers.relations,
-        boxes: state.reducers.boxes,
-    };
-};
+        relations: state.relations,
+        boxes: state.boxes,
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
         addBox: (type, value, position) => dispatch(addBox(type, value, position)),
-    };
-};
+    }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tools);
+export default connect(mapStateToProps, mapDispatchToProps)(Tools)

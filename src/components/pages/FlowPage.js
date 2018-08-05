@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import RenderRelation from '../parts/RenderRelation';
-import RenderBox from '../parts/RenderBox';
-import { deActivate } from '../../redux/actions';
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import Relations from '../parts/Relations'
+import Box from '../parts/Box'
+import { deActivate } from '../../redux/actions'
 import Tools from '../parts/Tools'
 import Panel from '../parts/Panel'
 
@@ -12,9 +12,9 @@ class FlowPage extends PureComponent {
     static getDerivedStateFromProps(props, state) {
         return {
             ...state,
-            boxesList: Object.values(props.boxes),
+            boxIdsList: Object.keys(props.boxes),
             relations: Object.values(props.relations),
-        };
+        }
     }
 
     // deactivate if any boxes active by click on chart
@@ -25,52 +25,52 @@ class FlowPage extends PureComponent {
     }
 
     render() {
-        let { activeBox } = this.props
+        const { activeBox } = this.props
+
         return (
             <div className={'flowpage'}>
                 <Tools />
                 <div className={'flowchart'}>
-                    <div onClick={(e) => this.deActivate(e)} className={'chart'}>
+                    <div onClick={this.deActivate} className={'chart'}>
+                    {
+                        this.state.boxIdsList.map((boxId) => {
+                            return <Box key={`box-${boxId}`} boxId={boxId} />
+                        })
+                    }
+                    <svg>
                         {
-                            this.state.boxesList.map((box) => {
-                            return (
-                                <RenderBox key={`box-${box.id}`} box={box} />
-                                );
+                            this.props.relations.map((relation) => {
+                                return (
+                                    <Relations
+                                        key={`${relation.fromBox}${relation.toBox}`}
+                                        relation={relation}
+                                    />
+                                )
                             })
                         }
-                        <svg>
-                            {
-                                this.props.relations.map((relation) => {
-                                    return (
-                                        <RenderRelation
-                                            key={`${relation.fromBox}${relation.toBox}`}
-                                            relation={relation}
-                                        />
-                                    );
-                                })
-                            }
-                        </svg>
-                    </div>
-                    <Panel box={activeBox} />
+                    </svg>
+                </div>
+                <Panel />
                 </div>
             </div>
-        );
+        )
     }
 }
 
 const mapStateToProps = (state) => {
-    let { relations, boxes, activeBox } = state.reducers;
+    const { relations, boxes, activeBox } = state
+    console.log(activeBox)
     return {
         relations,
         boxes,
         activeBox
-    };
-};
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
         deAcitvate: () => dispatch(deActivate()),
-    };
-};
+    }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(FlowPage);
+export default connect(mapStateToProps, mapDispatchToProps)(FlowPage)
