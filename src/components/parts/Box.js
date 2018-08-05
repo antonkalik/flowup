@@ -15,6 +15,42 @@ const drawLine = (from, to) => {
     // svg line
 }
 
+const tools = [{
+    type: 'Division',
+    value: 2,
+},
+{
+    type: 'Multiplication',
+    value: 3,
+},
+{
+    type: 'Addition',
+    value: 5,
+},
+{
+    type: 'Subtraction',
+    value: 10,
+}]
+
+const calculate = (type, valIn, value) => {
+    switch (type) {
+        case 'Multiplication':
+            return valIn * value
+            break;
+        case 'Division':
+            return valIn / value
+            break;
+        case 'Addition':
+            return valIn = value
+            break;
+        case 'Subtraction':
+            return valIn - value
+            break;
+        default:
+            return valOut
+    }
+}
+
 class Box extends PureComponent {
 
     onDrag = (e) => {
@@ -43,7 +79,7 @@ class Box extends PureComponent {
                 onDrag={this.onDrag}
                 onStart={this.onStart}
             >
-                <div onClick={() => setActiveBox()} className={isBoxActive ? 'box selected' : 'box'}>
+                <div onClick={setActiveBox} className={isBoxActive ? 'box selected' : 'box'}>
                     <div className={'handle'}>
                         <div className={'boxHead'}>
                             <div><h3>{box.type}</h3></div>
@@ -51,16 +87,19 @@ class Box extends PureComponent {
                         </div>
                     </div>
                     <div className={'boxBody'}>
-                        <div className={'boxIn'}>
-                            <div className={'dot dotIn'}>
-                                <svg>
-                                    <circle stroke={isBoxActive ? '#0772f5' : '#e6e6e6'}cx={'6'} cy={'6'} r={'4'}/>
-                                </svg>
-                            </div>
-                            <div className={'val'}><span>In:</span> 50</div>
-                        </div>
+                        {
+                            box.type !== 'Init' ?
+                            <div className={'boxIn'}>
+                                <div className={'dot dotIn'}>
+                                    <svg>
+                                        <circle stroke={isBoxActive ? '#0772f5' : '#e6e6e6'}cx={'6'} cy={'6'} r={'4'}/>
+                                    </svg>
+                                </div>
+                                <div className={'val'}><span>In: </span>{box.value}</div>
+                            </div> : null
+                        }
                         <div className={'boxOut'}>
-                            <div className={'val'}><span>Out:</span> 150</div>
+                            <div className={'val'}><span>Out: </span>{box.value}</div>
                             <div className={'dot dotOut'}>
                                 <svg>
                                     <circle stroke={isBoxActive ? '#0772f5' : '#e6e6e6'} cx={'6'} cy={'6'} r={'4'} />

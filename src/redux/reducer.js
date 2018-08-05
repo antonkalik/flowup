@@ -18,8 +18,8 @@ export default createReducer(initialState, {
         return {
             ...state,
             boxes: {
-            ...state.boxes,
-            [action.data.box.id]: action.data.box,
+                ...state.boxes,
+                [action.data.box.id]: action.data.box,
             },
         }
     },
@@ -27,11 +27,11 @@ export default createReducer(initialState, {
     [UPDATE_BOX_VALUE]: (state, action) => {
         const { value, boxId } = action.data
         const box = state.boxes[boxId]
-            return {
-                ...state,
-                boxes: {
-                    ...state.boxes,
-                    [boxId]: {
+        return {
+            ...state,
+            boxes: {
+                ...state.boxes,
+                [boxId]: {
                     ...box,
                     value,
                 },

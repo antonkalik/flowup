@@ -21,17 +21,16 @@ const tools = [{
 
 class Tools extends PureComponent {
     render() {
-
         return (
             <div className={'tools'}>
                 {
-                    tools.map(tool =>
+                    tools.map(({type, value}) =>
                         <button
-                            key={tool.type}
-                            onClick={() => this.props.addBox(tool.type, tool.value)}>
-                                {tool.type}
-                            </button>
-                        )
+                            key={type}
+                            onClick={() => this.props.addBox(type, value)}>
+                                {type}
+                        </button>
+                    )
                 }
             </div>
         )
