@@ -2,7 +2,18 @@ import { createReducer } from '../utils';
 import { ADD_BOX, SET_ACTIVE_BOX, INACTIVE, ADD_RELATION, DELETE_RELATION, UPDATE_BOX_POSITION, REMOVE_BOX } from './constants';
 
 const initialState = {
-  boxes: {},
+  boxes: {
+    '15034904136320446': {
+      id: '15034904136320446',
+      position: {x: 20, y: 20},
+      type: 'Init'
+    },
+    '67738743847829384': {
+      id: '67738743847829384',
+      position: {x: 250, y: 20},
+      type: 'Division'
+    },
+  },
   relations: []
 }
 

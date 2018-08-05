@@ -24,7 +24,7 @@ class FlowPage extends PureComponent {
     }
 
     render() {
-        console.log(this.props.isAnyBoxesActive)
+        console.log(this.props)
         return (
             <div className={'flowpage'}>
                 <Tools />

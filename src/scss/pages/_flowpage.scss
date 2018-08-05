@@ -9,22 +9,6 @@
         flex: 1;
         flex-flow: row;
         flex-direction: row;
-        p {
-            margin: 20px;
-            color: $mid-dark
-        }
-        .handle {
-            text-align: center;
-            padding: 10px;
-            font-weight: bold;
-            cursor: grab;
-            cursor: -webkit-grab;
-            z-index: 1
-        }
-        .react-draggable-dragging {
-            position: absolute;
-            z-index: 100;
-        }
         #panel {
             background-color: $light;
             width: 0px;
@@ -33,7 +17,6 @@
             -webkit-transition: width .4s;
             z-index: 1000;
         }
-        
         .chart {
             flex-grow: 3;
             overflow: hidden;

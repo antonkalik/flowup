@@ -32,7 +32,7 @@ class RenderBox extends PureComponent {
   }
 
   render() {
-    console.log(this.props)
+    let { isBoxActive } = this.props
     return (
       <Draggable
         handle={'.handle'}
@@ -41,16 +41,32 @@ class RenderBox extends PureComponent {
         onDrag={this.onDrag}
         onStart={this.onStart}
       >
-        <div onClick={() => this.props.setActiveBox()} className={this.props.isBoxActive ? 'box selected' : 'box'}>
+        <div onClick={() => this.props.setActiveBox()} className={isBoxActive ? 'box selected' : 'box'}>
           <div className={'handle'}>
             <div className={'boxHead'}>
                 <div><h3>{this.props.box.type}</h3></div>
-                <div className={'remove'} onClick={() => this.onRemove()}>{this.props.isBoxActive ? <div className={'fas fa-times'} /> : null}</div>
+                <div className={'remove'} onClick={() => this.onRemove()}>{isBoxActive ? <div className={'fas fa-times'} /> : null}</div>
               </div>
           </div>
-          <div>
-            <div>In</div>
-            <div>Out</div>
+          <div className={'boxBody'}>
+            <div className={'boxIn'}>
+              <div className={'dot dotIn'}>
+                <svg>
+                  <circle stroke={isBoxActive ? '#0772f5' : '#999'}  cx={'6'} cy={'6'} r={'4'}/>
+                </svg> 
+              </div>
+              <div className={'val'}><span>In:</span> 50</div>
+            </div>
+            <div className={'boxOut'}>
+              <div className={'val'}><span>Out:</span> 150</div>
+              <div className={'dot dotOut'}>
+                <svg>
+                  <circle stroke={isBoxActive ? '#0772f5' : '#999'} cx={'6'} cy={'6'} r={'4'}/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div className={'boxFooter'}>
             <input value={100} onChange={(e) => console.log(e.target.value)} />
           </div>
         </div>
