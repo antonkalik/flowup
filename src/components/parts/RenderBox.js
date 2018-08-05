@@ -32,6 +32,7 @@ class RenderBox extends PureComponent {
   }
 
   render() {
+    console.log(this.props)
     return (
       <Draggable
         handle={'.handle'}
@@ -40,11 +41,11 @@ class RenderBox extends PureComponent {
         onDrag={this.onDrag}
         onStart={this.onStart}
       >
-        <div className={this.props.isBoxActive ? 'box selected' : 'box'}>
+        <div onClick={() => this.props.setActiveBox()} className={this.props.isBoxActive ? 'box selected' : 'box'}>
           <div className={'handle'}>
             <div className={'boxHead'}>
-                <div><h3>Title</h3></div>
-                <div className={'remove'} onClick={() => this.onRemove()}>X</div>
+                <div><h3>{this.props.box.type}</h3></div>
+                <div className={'remove'} onClick={() => this.onRemove()}>{this.props.isBoxActive ? <div className={'fas fa-times'} /> : null}</div>
               </div>
           </div>
           <div>

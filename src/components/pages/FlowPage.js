@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import RenderRelation from '../parts/RenderRelation';
 import RenderBox from '../parts/RenderBox';
-import { addBox, deActivate } from '../../redux/actions';
-import { Tools } from '../parts/Tools'
+import { deActivate } from '../../redux/actions';
+import Tools from '../parts/Tools'
 
 class FlowPage extends PureComponent {
     state = {}
@@ -24,9 +24,10 @@ class FlowPage extends PureComponent {
     }
 
     render() {
+        console.log(this.props.isAnyBoxesActive)
         return (
             <div className={'flowpage'}>
-                <Tools addbox={() => this.props.addBox()} />
+                <Tools />
                 <div className={'flowchart'}>
                     <div onClick={(e) => this.deActivate(e)} className={'chart'}>
                         {
@@ -68,7 +69,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addBox: (position) => dispatch(addBox(position)),
         deAcitvate: () => dispatch(deActivate()),
     };
 };

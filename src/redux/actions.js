@@ -1,6 +1,6 @@
 import { ADD_BOX, SET_ACTIVE_BOX, ADD_RELATION, DELETE_RELATION, UPDATE_BOX_POSITION, DEFAULT_TYPE, INACTIVE, REMOVE_BOX } from './constants';
 
-const generateId = () => `${Math.random() * 1000}-${new Date().getTime()}`;
+const generateId = () => `${new Date().getTime() * Math.random() * 10000}`;
 const generatePositon = () => ({ x: 20, y: 20 });
 
 export const addBox = (type = DEFAULT_TYPE, position) => {
