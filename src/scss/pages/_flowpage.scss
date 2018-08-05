@@ -9,14 +9,7 @@
         flex: 1;
         flex-flow: row;
         flex-direction: row;
-        #panel {
-            background-color: $light;
-            width: 0px;
-            border-left: 2px solid $gray;
-            transition: width .4s;
-            -webkit-transition: width .4s;
-            z-index: 1000;
-        }
+        overflow: hidden;
         .chart {
             flex-grow: 3;
             overflow: hidden;

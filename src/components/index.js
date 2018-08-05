@@ -2,6 +2,7 @@
 export { Navigation } from './parts/Navigation'
 export { Footer } from './parts/Footer'
 export { Tools } from './parts/Tools'
+export { Panel } from './parts/Panel'
 
 // pages
 export { NotFoundPage } from './pages/NotFoundPage'

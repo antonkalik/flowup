@@ -5,4 +5,5 @@ export const DELETE_RELATION = 'DELETE_RELATION';
 export const UPDATE_BOX_POSITION = 'UPDATE_BOX_POSITION';
 export const DEFAULT_TYPE = 'DEFAULT_TYPE';
 export const INACTIVE = 'INACTIVE';
-export const REMOVE_BOX = 'REMOVE_BOX'
+export const REMOVE_BOX = 'REMOVE_BOX';
+export const UPDATE_BOX_VALUE = 'UPDATE_BOX_VALUE';

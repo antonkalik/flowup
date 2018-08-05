@@ -1,19 +1,16 @@
 import { createReducer } from '../utils';
-import { ADD_BOX, SET_ACTIVE_BOX, INACTIVE, ADD_RELATION, DELETE_RELATION, UPDATE_BOX_POSITION, REMOVE_BOX } from './constants';
+import { ADD_BOX, SET_ACTIVE_BOX, INACTIVE, ADD_RELATION, DELETE_RELATION, UPDATE_BOX_POSITION, REMOVE_BOX, UPDATE_BOX_VALUE } from './constants';
 
 const initialState = {
   boxes: {
     '15034904136320446': {
       id: '15034904136320446',
       position: {x: 20, y: 20},
-      type: 'Init'
-    },
-    '67738743847829384': {
-      id: '67738743847829384',
-      position: {x: 250, y: 20},
-      type: 'Division'
+      type: 'Init',
+      value: 0
     },
   },
+  activeBox: {},
   relations: []
 }
 
@@ -27,6 +24,21 @@ export default createReducer(initialState, {
       },
     };
   },
+
+  [UPDATE_BOX_VALUE]: (state, action) => {
+    const { value, boxId } = action.data;
+    const box = state.boxes[boxId];
+    return {
+      ...state,
+      boxes: {
+        ...state.boxes,
+        [boxId]: {
+          ...box,
+          value,
+        },
+      },
+    };
+  },
 
   [REMOVE_BOX]: (state, action) => {
     const { boxId } = action.data
@@ -42,14 +54,14 @@ export default createReducer(initialState, {
   [SET_ACTIVE_BOX]: (state, action) => {
     return {
       ...state,
-      activeBoxId: action.data.activeBoxId,
+      activeBox: action.data.activeBox,
     };
   },
 
   [INACTIVE]: (state) => {
     return {
       ...state,
-      activeBoxId: false
+      activeBox: false
     };
   },
 

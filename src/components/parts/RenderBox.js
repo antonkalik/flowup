@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { updateBoxPosition, setActiveBox, removeBox } from '../../redux/actions';
+import { updateBoxPosition, setActiveBox, removeBox, updateBoxValue } from '../../redux/actions';
 import Draggable from 'react-draggable'
 
 // const getFromPositon = (boxPositon) => {
@@ -18,7 +18,6 @@ import Draggable from 'react-draggable'
 class RenderBox extends PureComponent {
 
   onDrag = (e) => {
-    // detect position via event here
     const position = { x: e.clientX, y: e.clientY }
     this.props.boxPositon(position);
   }
@@ -29,6 +28,10 @@ class RenderBox extends PureComponent {
 
   onRemove = () => {
     this.props.removeBox()
+  }
+
+  onChangeValue = (value) => {
+    this.props.boxValue(value)
   }
 
   render() {
@@ -52,7 +55,7 @@ class RenderBox extends PureComponent {
             <div className={'boxIn'}>
               <div className={'dot dotIn'}>
                 <svg>
-                  <circle stroke={isBoxActive ? '#0772f5' : '#999'}  cx={'6'} cy={'6'} r={'4'}/>
+                  <circle stroke={isBoxActive ? '#0772f5' : '#e6e6e6'}  cx={'6'} cy={'6'} r={'4'}/>
                 </svg> 
               </div>
               <div className={'val'}><span>In:</span> 50</div>
@@ -61,13 +64,13 @@ class RenderBox extends PureComponent {
               <div className={'val'}><span>Out:</span> 150</div>
               <div className={'dot dotOut'}>
                 <svg>
-                  <circle stroke={isBoxActive ? '#0772f5' : '#999'} cx={'6'} cy={'6'} r={'4'}/>
+                  <circle stroke={isBoxActive ? '#0772f5' : '#e6e6e6'} cx={'6'} cy={'6'} r={'4'}/>
                 </svg>
               </div>
             </div>
           </div>
           <div className={'boxFooter'}>
-            <input value={100} onChange={(e) => console.log(e.target.value)} />
+            <input type={'number'} value={this.props.box.value} onChange={(e) => this.onChangeValue(e.target.value)} />
           </div>
         </div>
       </Draggable>
@@ -77,14 +80,15 @@ class RenderBox extends PureComponent {
 
 const mapStateToProps = (state, { box }) => {
   return {
-    isBoxActive: state.reducers.activeBoxId === box.id,
+    isBoxActive: state.reducers.activeBox.id === box.id,
   };
 };
 
 const mapDispatchToProps = (dispatch, { box }) => {
   return {
     boxPositon: (position) => dispatch(updateBoxPosition(box.id, position)),
-    setActiveBox: () => dispatch(setActiveBox(box.id)),
+    boxValue: (value) => dispatch(updateBoxValue(box.id, value)),
+    setActiveBox: () => dispatch(setActiveBox(box)),
     removeBox: () => dispatch(removeBox(box.id)),
   };
 };

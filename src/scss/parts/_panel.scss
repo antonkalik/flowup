@@ -1,0 +1,19 @@
+.panel {
+    width: 0px;
+    overflow: hidden;
+    background-color: $light;
+    border-left: 2px solid $gray;
+    transition: .4s;
+    -webkit-transition: .4s;
+    z-index: 1000;
+    .panelContent {
+        display: flex;
+        flex-direction: column;
+        li {
+            padding: 20px
+        }
+        button {
+            width: 100px;
+        }
+    }
+}

@@ -4,6 +4,7 @@ import RenderRelation from '../parts/RenderRelation';
 import RenderBox from '../parts/RenderBox';
 import { deActivate } from '../../redux/actions';
 import Tools from '../parts/Tools'
+import Panel from '../parts/Panel'
 
 class FlowPage extends PureComponent {
     state = {}
@@ -24,7 +25,7 @@ class FlowPage extends PureComponent {
     }
 
     render() {
-        console.log(this.props)
+        let { activeBox } = this.props
         return (
             <div className={'flowpage'}>
                 <Tools />
@@ -50,9 +51,7 @@ class FlowPage extends PureComponent {
                             }
                         </svg>
                     </div>
-                    {
-                        this.props.isAnyBoxesActive ? <div id={'panel'} style={{width: 200}} /> : <div id={'panel'} style={{width: 0}} />
-                    }
+                    <Panel />
                 </div>
             </div>
         );
@@ -60,10 +59,11 @@ class FlowPage extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
+    let { relations, boxes, activeBox } = state.reducers;
     return {
-        relations: state.reducers.relations,
-        boxes: state.reducers.boxes,
-        isAnyBoxesActive: state.reducers.activeBoxId
+        relations,
+        boxes,
+        activeBox
     };
 };
 

@@ -2,13 +2,29 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux';
 import { addBox } from '../../redux/actions';
 
+const tools = [{
+        type: 'Division',
+        value: 2,
+    },
+    {
+        type: 'Multiplication',
+        value: 3,
+    },
+    {
+        type: 'Addition',
+        value: 5,
+    },
+    {
+        type: 'Subtraction',
+        value: 10,
+    }]
+
 class Tools extends PureComponent {
     render() {
-        const tools = ['Division', 'Multiplication', 'Addition', 'Subtraction']
         return (
             <div className={'tools'}>
                 {
-                    tools.map(tool => <button key={tool} onClick={() => this.props.addBox(tool)}>{tool}</button>)
+                    tools.map(tool => <button key={tool.type} onClick={() => this.props.addBox(tool.type, tool.value)}>{tool.type}</button>)
                 }
             </div>
         )
@@ -24,7 +40,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addBox: (position) => dispatch(addBox(position)),
+        addBox: (type, value, position) => dispatch(addBox(type, value, position)),
     };
 };
 
