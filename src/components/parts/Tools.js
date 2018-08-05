@@ -21,10 +21,19 @@ const tools = [{
 
 class Tools extends PureComponent {
     render() {
+        const lastPostion = Object.values(this.props.boxes).slice(-1)[0].position
+        const position = {x: lastPostion.x + 20, y: lastPostion.y}
+        
         return (
             <div className={'tools'}>
                 {
-                    tools.map(tool => <button key={tool.type} onClick={() => this.props.addBox(tool.type, tool.value)}>{tool.type}</button>)
+                    tools.map(tool => 
+                        <button 
+                            key={tool.type}
+                            onClick={() => this.props.addBox(tool.type, tool.value, position)}>
+                                {tool.type}
+                            </button>
+                        )
                 }
             </div>
         )

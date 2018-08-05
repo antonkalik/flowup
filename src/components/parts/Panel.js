@@ -8,14 +8,14 @@ class Panel extends PureComponent {
     }
 
     render() {
-        let { activeBox } = this.props
+        let { box } = this.props
         return (
-            <div className={'panel'} style={{width: activeBox.id ? 200 : 0}}>
+            <div className={'panel'} style={{width: box.id ? 200 : 0}}>
                 <div className={'panelContent'}>
-                    <h3>{activeBox.type}</h3>
-                    <input type={'number'} value={activeBox.value} onChange={(e) => this.onChangeValue(e.target.value)} />
+                    <h3>{box.type}</h3>
+                    <input type={'number'} value={box.value} onChange={(e) => this.onChangeValue(e.target.value)} />
                     <button>Accept</button>
-                    <button>Reset</button>
+                    <button>Remove</button>
                 </div>
             </div>
         )
@@ -28,11 +28,10 @@ const mapStateToProps = (state) => {
     };
 };
   
-const mapDispatchToProps = (dispatch, props) => {
-    console.log('Тут нужно чтобы появились пропсы:', props)
+const mapDispatchToProps = (dispatch, { box }) => {
     return {
-      boxValue: (value) => dispatch(updateBoxValue(activeBox.id, value)),
-      removeBox: () => dispatch(removeBox(activeBox.id)),
+      boxValue: (value) => dispatch(updateBoxValue(box.id, value)),
+      removeBox: () => dispatch(removeBox(box.id)),
     };
 };
 

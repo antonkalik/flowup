@@ -35,7 +35,7 @@ class RenderBox extends PureComponent {
   }
 
   render() {
-    let { isBoxActive } = this.props
+    let { isBoxActive, box } = this.props
     return (
       <Draggable
         handle={'.handle'}
@@ -70,7 +70,7 @@ class RenderBox extends PureComponent {
             </div>
           </div>
           <div className={'boxFooter'}>
-            <input type={'number'} value={this.props.box.value} onChange={(e) => this.onChangeValue(e.target.value)} />
+            <input type={'number'} value={box.value} onChange={(e) => this.onChangeValue(e.target.value)} />
           </div>
         </div>
       </Draggable>

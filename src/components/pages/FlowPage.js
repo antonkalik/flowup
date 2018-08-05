@@ -51,7 +51,7 @@ class FlowPage extends PureComponent {
                             }
                         </svg>
                     </div>
-                    <Panel />
+                    <Panel box={activeBox} />
                 </div>
             </div>
         );
