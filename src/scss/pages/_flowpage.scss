@@ -42,6 +42,7 @@
         .selected {
             border: 2px solid blue;
             position: absolute;
+            z-index: 100;
         }
         
         #panel {
