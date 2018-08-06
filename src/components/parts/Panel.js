@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { updateBoxValue, removeBox } from '../../redux/actions'
+import { updateBoxValue, removeBox, deActivate } from '../../redux/actions'
 
+console.log(deActivate)
 class Panel extends PureComponent {
 
     onChangeValue = (e) => {
@@ -9,13 +10,14 @@ class Panel extends PureComponent {
     }
 
     render() {
-        const { box, removeBox } = this.props
+        const { box, removeBox, deActivate } = this.props
         return (
             box ? <div className={'panel'}>
                 <div className={'panelContent'}>
                     <h3>{box.type}</h3>
                     <input type={'number'} value={box.value} onChange={this.onChangeValue} />
-                    <button onClick={removeBox}>Remove</button>
+                    <button onClick={deActivate}>Ok</button>
+                    <button className={'remove'} onClick={removeBox}>Remove</button>
                 </div>
             </div> : null
         )
@@ -32,6 +34,7 @@ const mapDispatchToProps = (dispatch, { activeBoxId }) => {
     return {
         updateBoxValue: (value) => dispatch(updateBoxValue(activeBoxId, value)),
         removeBox: () => dispatch(removeBox(activeBoxId)),
+        deActivate: () => dispatch(deActivate()),
     }
 }
 

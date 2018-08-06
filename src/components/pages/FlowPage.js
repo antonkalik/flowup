@@ -20,7 +20,7 @@ class FlowPage extends PureComponent {
     // deactivate if any boxes active by click on chart
     deActivate = (e) => {
         if (e.target.className === 'chart') {
-            this.props.deAcitvate()
+            this.props.deActivate()
         }
     }
 
@@ -67,7 +67,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        deAcitvate: () => dispatch(deActivate()),
+        deActivate: () => dispatch(deActivate()),
     }
 }
 
