@@ -17,7 +17,6 @@ class FlowPage extends PureComponent {
         }
     }
 
-    // deactivate if any boxes active by click on chart
     deActivate = (e) => {
         if (e.target.className === 'chart') {
             this.props.deActivate()

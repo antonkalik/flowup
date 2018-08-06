@@ -49,7 +49,7 @@ class Box extends PureComponent {
                 return valIn - val
                 break;
             default:
-                return
+                return val
         }
     }
 

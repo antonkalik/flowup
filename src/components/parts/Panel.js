@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { updateBoxValue, removeBox, deActivate } from '../../redux/actions'
 
-console.log(deActivate)
 class Panel extends PureComponent {
 
     onChangeValue = (e) => {
