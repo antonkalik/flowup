@@ -30,6 +30,7 @@ class Tools extends PureComponent {
         const { boxes } = this.props
         const lp = Object.values(boxes).slice(-1)[0].position
         const position = { x: lp.x + 20, y: lp.y + 10 }
+
         return (
             <div className={'tools'}>
                 {

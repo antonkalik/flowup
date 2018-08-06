@@ -1,26 +1,33 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-const getFromPositon = (boxPositon) => {
-    // svg coords shit
+const getFromPositon = ({ position }) => {
+
+    return { x: position.x, y: position.y}
 }
 
-const getToPositon = (boxPositon) => {
-    // svg coords shit
+const getToPositon = ({ position }) => {
+    return { x: position.x, y: position.y}
 }
 
 const drawLine = (from, to) => {
     // svg line
+    return (
+        <svg>
+            <line x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke={'#000'} strokeWidth={'2px'}/>
+        </svg>
+    )
 }
 
 class Relations extends PureComponent {
     render() {
         const from = getFromPositon(this.props.fromBox)
-        const to = getFromPositon(this.props.toBox)
+        const to = getToPositon(this.props.toBox)
+
         return (
             <g>
                 {
-                    drawLine(from, to)
+                    drawLine(this.props.fromBox.position, this.props.toBox.position)
                 }
             </g>
         )

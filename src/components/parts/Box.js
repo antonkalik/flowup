@@ -3,18 +3,6 @@ import { connect } from 'react-redux'
 import { updateBoxPosition, setActiveBox, removeBox, updateBoxValue } from '../../redux/actions'
 import Draggable from 'react-draggable'
 
-const getFromPositon = (boxPositon) => {
-    // svg coords shit
-}
-
-const getToPositon = (boxPositon) => {
-    // svg coords shit
-}
-
-const drawLine = (from, to) => {
-    // svg line
-}
-
 const tools = [{
     type: 'Division',
     value: 2,

@@ -21,13 +21,13 @@ const initialState = {
         },
         '8284397942684193': {
             id: '8284397942684193',
-            position: {x: 40, y: 20},
+            position: {x: 240, y: 20},
             type: 'Addition',
             value: 5
         },
     },
     relations: [{
-        fromBox: '8284397942684193',
+        fromBox: '15034904136320446',
         toBox: '8284397942684193'
     }]
 }
@@ -115,7 +115,6 @@ export default createReducer(initialState, {
     [UPDATE_BOX_POSITION]: (state, action) => {
         const { position, boxId } = action.data
         const box = state.boxes[boxId]
-
         return {
             ...state,
             boxes: {
