@@ -12,7 +12,6 @@ import {
 } from './constants'
 
 const generateId = () => `${new Date().getTime() * Math.random() * 10000}`
-const generatePositon = () => ({ x: 20, y: 20 })
 
 export const addBox = (type = DEFAULT_TYPE, value = 1, position) => {
     return {
@@ -22,7 +21,7 @@ export const addBox = (type = DEFAULT_TYPE, value = 1, position) => {
                 id: generateId(),
                 type,
                 value,
-                position: position || generatePositon(),
+                position,
             },
         },
     }
@@ -98,6 +97,7 @@ export const updateBoxValue = (boxId, value) => {
 }
 
 export const updateJsonValue = (value) => {
+    console.log(value)
     return {
         type: UPDATE_JSON_VALUE,
         data: {

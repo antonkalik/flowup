@@ -16,10 +16,7 @@ class JsonPage extends PureComponent {
 
     onChangeValue = (e) => {
         const value = JSON.parse(e.target.value);
-
         this.props.updateJsonValue(value)
-        // first you send just json file to store
-        // in action you parse it ot obj
     }
 
     render() {

@@ -17,7 +17,7 @@ class FlowPage extends PureComponent {
         }
     }
 
-    deActivate = (e) => {
+    doDeActivate = (e) => {
         if (e.target.className.baseVal === 'svgBack') {
             this.props.deActivate()
         }
@@ -29,7 +29,7 @@ class FlowPage extends PureComponent {
             <div className={'flowpage'}>
                 <Tools />
                 <div className={'flowchart'}>
-                    <div onClick={this.deActivate} className={'chart'}>
+                    <div onClick={this.doDeActivate} className={'chart'}>
                         {
                             this.state.boxIdsList.map((boxId) => {
                                 return <Box

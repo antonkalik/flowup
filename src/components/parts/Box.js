@@ -33,7 +33,6 @@ const tools = [{
 }]
 
 class Box extends PureComponent {
-
     onCalculate = (type, valIn, val) => {
         switch (type) {
             case 'Multiplication':

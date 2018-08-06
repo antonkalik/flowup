@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { addBox } from '../../redux/actions'
 
-const tools = [{
+const tools = [
+    {
         type: 'Division',
         value: 2,
         icon: 'fa-divide'
@@ -21,7 +22,8 @@ const tools = [{
         type: 'Subtraction',
         value: 10,
         icon: 'fa-minus'
-    }]
+    }
+]
 
 class Tools extends PureComponent {
     render() {
