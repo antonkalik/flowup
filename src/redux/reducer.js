@@ -5,7 +5,6 @@ import {
     ADD_RELATION,
     DELETE_RELATION,
     UPDATE_BOX_POSITION,
-    DEFAULT_TYPE,
     DEACTIVATE_BOX,
     REMOVE_BOX,
     UPDATE_BOX_VALUE,
@@ -20,13 +19,17 @@ const initialState = {
             type: 'Init',
             value: 0
         },
+        '8284397942684193': {
+            id: '8284397942684193',
+            position: {x: 40, y: 20},
+            type: 'Addition',
+            value: 5
+        },
     },
-    relations: [
-        {
-            from: '3e3',
-            to: 40
-        }
-    ]
+    relations: [{
+        fromBox: '8284397942684193',
+        toBox: '8284397942684193'
+    }]
 }
 
 export default createReducer(initialState, {

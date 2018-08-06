@@ -97,7 +97,6 @@ export const updateBoxValue = (boxId, value) => {
 }
 
 export const updateJsonValue = (value) => {
-    console.log(value)
     return {
         type: UPDATE_JSON_VALUE,
         data: {
