@@ -1,4 +1,15 @@
-import { ADD_BOX, SET_ACTIVE_BOX, ADD_RELATION, DELETE_RELATION, UPDATE_BOX_POSITION, DEFAULT_TYPE, DEACTIVATE_BOX, REMOVE_BOX, UPDATE_BOX_VALUE } from './constants'
+import {
+    ADD_BOX,
+    SET_ACTIVE_BOX,
+    ADD_RELATION,
+    DELETE_RELATION,
+    UPDATE_BOX_POSITION,
+    DEFAULT_TYPE,
+    DEACTIVATE_BOX,
+    REMOVE_BOX,
+    UPDATE_BOX_VALUE,
+    UPDATE_JSON_VALUE
+} from './constants'
 
 const generateId = () => `${new Date().getTime() * Math.random() * 10000}`
 const generatePositon = () => ({ x: 20, y: 20 })
@@ -81,6 +92,15 @@ export const updateBoxValue = (boxId, value) => {
         type: UPDATE_BOX_VALUE,
         data: {
             boxId,
+            value,
+        },
+    }
+}
+
+export const updateJsonValue = (value) => {
+    return {
+        type: UPDATE_JSON_VALUE,
+        data: {
             value,
         },
     }

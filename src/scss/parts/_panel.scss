@@ -1,10 +1,10 @@
 .panel {
-    width: 200px;
     overflow: hidden;
     background-color: $light;
     border-left: 2px solid $gray;
-    transition: .4s;
-    -webkit-transition: .4s;
+    transition: width .4s;
+    -webkit-transition: width .4s;
+    width: 200px;
     z-index: 1000;
     .panelContent {
         display: flex;
@@ -24,6 +24,9 @@
             border: solid 1px $gray;
             border-radius: 4px;
             padding: 5px;
+            &:hover {
+                border: 1px solid darken($gray, 9);
+            }
         }
         button {
             width: 100px;
@@ -34,7 +37,8 @@
             border: 1px solid $gray;
             cursor: pointer;
             &:hover {
-                color: $blue
+                color: $blue;
+                border: 1px solid darken($gray, 9);
             }
         }
         button.remove:hover {

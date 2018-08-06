@@ -18,7 +18,7 @@ class FlowPage extends PureComponent {
     }
 
     deActivate = (e) => {
-        if (e.target.className === 'chart') {
+        if (e.target.className.baseVal === 'svgBack') {
             this.props.deActivate()
         }
     }
@@ -30,24 +30,25 @@ class FlowPage extends PureComponent {
                 <Tools />
                 <div className={'flowchart'}>
                     <div onClick={this.deActivate} className={'chart'}>
-                    {
-                        this.state.boxIdsList.map((boxId) => {
-                            return <Box key={`box-${boxId}`} boxId={boxId} />
-                        })
-                    }
-                    <svg>
                         {
-                            relations.map((relation) => {
-                                return (
-                                    <Relations
+                            this.state.boxIdsList.map((boxId) => {
+                                return <Box
+                                    key={`box-${boxId}`}
+                                    boxId={boxId}
+                                />
+                            })
+                        }
+                        <svg className={'svgBack'}>
+                            {
+                                relations.map((relation) => {
+                                    return <Relations
                                         key={`${relation.fromBox}${relation.toBox}`}
                                         relation={relation}
                                     />
-                                )
-                            })
-                        }
-                    </svg>
-                </div>
+                                })
+                            }
+                        </svg>
+                    </div>
                     <Panel activeBoxId={activeBoxId} />
                 </div>
             </div>

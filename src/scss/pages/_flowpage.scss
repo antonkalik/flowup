@@ -9,11 +9,13 @@
         flex: 1;
         flex-flow: row;
         flex-direction: row;
-        overflow: hidden;
         .chart {
             flex-grow: 3;
-            overflow: hidden;
             z-index: 1;
+        }
+        .svgBack {
+            width: 100%;
+            height: 100%;
         }
     }
 }

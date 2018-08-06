@@ -10,6 +10,7 @@ class Panel extends PureComponent {
 
     render() {
         const { box, removeBox, deActivate } = this.props
+
         return (
             box ? <div className={'panel'}>
                 <div className={'panelContent'}>

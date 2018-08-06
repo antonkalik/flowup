@@ -1,5 +1,16 @@
 import { createReducer } from '../utils'
-import { ADD_BOX, SET_ACTIVE_BOX, DEACTIVATE_BOX, ADD_RELATION, DELETE_RELATION, UPDATE_BOX_POSITION, REMOVE_BOX, UPDATE_BOX_VALUE } from './constants'
+import {
+    ADD_BOX,
+    SET_ACTIVE_BOX,
+    ADD_RELATION,
+    DELETE_RELATION,
+    UPDATE_BOX_POSITION,
+    DEFAULT_TYPE,
+    DEACTIVATE_BOX,
+    REMOVE_BOX,
+    UPDATE_BOX_VALUE,
+    UPDATE_JSON_VALUE
+} from './constants'
 
 const initialState = {
     boxes: {
@@ -10,7 +21,12 @@ const initialState = {
             value: 0
         },
     },
-    relations: []
+    relations: [
+        {
+            from: '3e3',
+            to: 40
+        }
+    ]
 }
 
 export default createReducer(initialState, {
@@ -36,6 +52,13 @@ export default createReducer(initialState, {
                     value,
                 },
             },
+        }
+    },
+
+    [UPDATE_JSON_VALUE]: (state, action) => {
+        return {
+            ...state,
+            boxes: action.data.value.boxes
         }
     },
 
