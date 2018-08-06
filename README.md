@@ -3,7 +3,7 @@ Flowup App
 
 
 ### Check demo right [here](https://flowup2.netlify.com/).
-Old demo [here](https://flowup.netlify.com/).
+### Old demo [here](https://flowup.netlify.com/).
 ---
 
 
