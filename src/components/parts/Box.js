@@ -3,23 +3,6 @@ import { connect } from 'react-redux'
 import { updateBoxPosition, setActiveBox, removeBox, updateBoxValue } from '../../redux/actions'
 import Draggable from 'react-draggable'
 
-const tools = [{
-    type: 'Division',
-    value: 2,
-},
-{
-    type: 'Multiplication',
-    value: 3,
-},
-{
-    type: 'Addition',
-    value: 5,
-},
-{
-    type: 'Subtraction',
-    value: 10,
-}]
-
 class Box extends PureComponent {
     onCalculate = (type, valIn, val) => {
         switch (type) {
