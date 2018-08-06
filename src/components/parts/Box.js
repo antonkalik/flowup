@@ -32,26 +32,26 @@ const tools = [{
     value: 10,
 }]
 
-const calculate = (type, valIn, value) => {
-    switch (type) {
-        case 'Multiplication':
-            return valIn * value
-            break;
-        case 'Division':
-            return valIn / value
-            break;
-        case 'Addition':
-            return valIn = value
-            break;
-        case 'Subtraction':
-            return valIn - value
-            break;
-        default:
-            return valOut
-    }
-}
-
 class Box extends PureComponent {
+
+    onCalculate = (type, valIn, val) => {
+        switch (type) {
+            case 'Multiplication':
+                return valIn * val
+                break;
+            case 'Division':
+                return valIn / val
+                break;
+            case 'Addition':
+                return valIn + val
+                break;
+            case 'Subtraction':
+                return valIn - val
+                break;
+            default:
+                return
+        }
+    }
 
     onDrag = (e) => {
         const position = { x: e.clientX, y: e.clientY }
@@ -67,7 +67,7 @@ class Box extends PureComponent {
     }
 
     onChangeValue = (e) => {
-        this.props.boxValue(e.target.value)
+        this.props.boxValue(parseInt(e.target.value))
     }
 
     render() {
@@ -99,7 +99,7 @@ class Box extends PureComponent {
                             </div> : null
                         }
                         <div className={'boxOut'}>
-                            <div className={'val'}><span>Out: </span>{box.value}</div>
+                            <div className={'val'}><span>Out: </span>{this.onCalculate(box.type, box.value, box.value)}</div>
                             <div className={'dot dotOut'}>
                                 <svg>
                                     <circle stroke={isBoxActive ? '#0772f5' : '#e6e6e6'} cx={'6'} cy={'6'} r={'4'} />

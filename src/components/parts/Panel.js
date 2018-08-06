@@ -5,7 +5,7 @@ import { updateBoxValue, removeBox } from '../../redux/actions'
 class Panel extends PureComponent {
 
     onChangeValue = (e) => {
-        this.props.updateBoxValue(e.target.value)
+        this.props.updateBoxValue(parseInt(e.target.value))
     }
 
     render() {
