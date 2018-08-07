@@ -24,7 +24,7 @@ class Box extends PureComponent {
     }
 
     onDrag = (e) => {
-        const position = { x: e.clientX, y: e.clientY }
+        const position = { x: e.x, y: e.y }
         this.props.boxPositon(position)
     }
 
