@@ -41,13 +41,15 @@ class Box extends PureComponent {
     }
 
     render() {
-    const { isBoxActive, box, setActiveBox } = this.props
+    const { isBoxActive, box, setActiveBox, ref } = this.props
+    console.log(ref)
     return (
             <Draggable
                 handle={'.handle'}
                 defaultPosition={box.position}
                 onDrag={this.onDrag}
                 onStart={this.onStart}
+                position={null}
             >
                 <div onClick={setActiveBox} className={isBoxActive ? 'box selected' : 'box'}>
                     <div className={'handle'}>

@@ -13,18 +13,24 @@ import {
 
 const generateId = () => `${new Date().getTime() * Math.random() * 10000}`
 
+const generatePositon = () => {
+    const x = Math.floor(Math.random() * 100)
+    const y = Math.floor(Math.random() * 100)
+    return { x, y }
+}
+
 export const addBox = (type = DEFAULT_TYPE, value = 1, position) => {
-    return {
-        type: ADD_BOX,
-        data: {
-            box: {
-                id: generateId(),
-                type,
-                value,
-                position,
-            },
-        },
-    }
+  return {
+    type: ADD_BOX,
+    data: {
+      box: {
+        id: generateId(),
+        type,
+        value,
+        position: position || generatePositon(),
+      },
+    },
+  }
 }
 
 export const removeBox = (boxId) => {

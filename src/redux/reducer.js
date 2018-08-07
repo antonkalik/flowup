@@ -12,7 +12,20 @@ import {
 } from './constants'
 
 const initialState = {
-    boxes: {},
+    boxes: {
+        '15034904136320446': {
+            id: '15034904136320446',
+            position: {x: 20, y: 20},
+            type: 'Init',
+            value: 0
+        },
+        '8284397942684193': {
+            id: '8284397942684193',
+            position: {x: 240, y: 20},
+            type: 'Addition',
+            value: 5
+        },
+    },
     relations: []
 }
 
