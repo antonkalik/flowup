@@ -1,9 +1,10 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, createRef } from 'react'
 import { connect } from 'react-redux'
 import { updateBoxPosition, setActiveBox, removeBox, updateBoxValue } from '../../redux/actions'
 import Draggable from 'react-draggable'
 
 class Box extends PureComponent {
+
     onCalculate = (type, valIn, val) => {
         switch (type) {
             case 'Multiplication':
@@ -24,7 +25,8 @@ class Box extends PureComponent {
     }
 
     onDrag = (e) => {
-        const position = { x: e.x, y: e.y }
+        console.log(e)
+        const position = { x: e.pageX - 102, y: e.pageY - 163}
         this.props.boxPositon(position)
     }
 
@@ -42,14 +44,12 @@ class Box extends PureComponent {
 
     render() {
     const { isBoxActive, box, setActiveBox, ref } = this.props
-    console.log(ref)
     return (
             <Draggable
                 handle={'.handle'}
-                defaultPosition={box.position}
                 onDrag={this.onDrag}
                 onStart={this.onStart}
-                position={null}
+                position={box.position}
             >
                 <div onClick={setActiveBox} className={isBoxActive ? 'box selected' : 'box'}>
                     <div className={'handle'}>
