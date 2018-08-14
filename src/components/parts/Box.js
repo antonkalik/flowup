@@ -25,7 +25,6 @@ class Box extends PureComponent {
     }
 
     onDrag = (e) => {
-        console.log(e)
         const position = { x: e.pageX - 102, y: e.pageY - 163}
         this.props.boxPositon(position)
     }
@@ -49,7 +48,7 @@ class Box extends PureComponent {
                 handle={'.handle'}
                 onDrag={this.onDrag}
                 onStart={this.onStart}
-                position={box.position}
+                defaultPosition={box.position}
             >
                 <div onClick={setActiveBox} className={isBoxActive ? 'box selected' : 'box'}>
                     <div className={'handle'}>
