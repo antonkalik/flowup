@@ -26,7 +26,10 @@ const initialState = {
             value: 5
         },
     },
-    relations: []
+    relations: [{
+        fromBox: '15034904136320446',
+        toBox: '8284397942684193'
+    }]
 }
 
 export default createReducer(initialState, {
